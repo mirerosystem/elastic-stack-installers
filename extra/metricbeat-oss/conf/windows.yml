@@ -1,0 +1,52 @@
+- module: windows
+  metricsets:
+    - perfmon
+  period: 30s
+  perfmon.ignore_non_existent_counters: true
+  perfmon.group_measurements_by_instance: true  
+  perfmon.counters:
+    - instance_label: cpu.name
+      measurement_label: cpu.processor.processor_time
+      query: '\Processor(*)\% Processor Time'
+    - instance_label: cpu.system.name
+      measurement_label: cpu.system.processor_queue_length
+      query: '\System\Processor Queue Length'
+    - instance_label: memory.name
+      measurement_label: memory.memory.available_mbytes
+      query: '\Memory\Available MBytes'
+    - instance_label: memory.name
+      measurement_label: memory.server.pool_nonpaged_failures
+      query: '\Server\Pool Nonpaged Failures'
+    - instance_label: disk.name
+      measurement_label: disk.physicaldisk.avg.disk_sec_read
+      query: '\PhysicalDisk(*)\Avg. Disk Sec/Read'      
+    - instance_label: disk.name
+      measurement_label: disk.physicaldisk.avg.disk_sec_write
+      query: '\PhysicalDisk(*)\Avg. Disk Sec/Write'            
+    - instance_label: disk.name
+      measurement_label: disk.physicaldisk.disk_transfers_sec
+      query: '\PhysicalDisk(*)\Disk Transfers/sec'
+    - instance_label: disk.name
+      measurement_label: disk.physicaldisk.disk_bytes_sec
+      query: '\PhysicalDisk(*)\Disk Bytes/sec'
+    - instance_label: disk.name
+      measurement_label: disk.physicaldisk.disk_write_bytes_sec
+      query: '\PhysicalDisk(*)\Disk Write Bytes/sec'
+    - instance_label: disk.name
+      measurement_label: disk.physicaldisk.disk_read_bytes_sec
+      query: '\PhysicalDisk(*)\Disk Read Bytes/sec'
+    - instance_label: disk.name
+      measurement_label: disk.physicaldisk.per_idle_time
+      query: '\PhysicalDisk(*)\% Idle Time'
+    - instance_label: nic.name
+      measurement_label: nic.total_sec
+      query: '\Network Interface(*)\Bytes Total/sec'
+    - instance_label: nic.name
+      measurement_label: nic.output_queue_length
+      query: '\Network Interface(*)\Output Queue Length'
+    - instance_label: nic.name
+      measurement_label: nic.in.per_sec
+      query: '\Network Interface(*)\Bytes Received/sec'
+    - instance_label: nic.name
+      measurement_label: nic.out.per_sec
+      query: '\Network Interface(*)\Bytes Sent/sec'

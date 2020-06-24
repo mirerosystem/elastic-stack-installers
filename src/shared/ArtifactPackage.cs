@@ -9,7 +9,7 @@ namespace Elastic.Installer
     public class ArtifactPackage
     {
         public string TargetName { get; }
-        public string Version { get; }
+        public string Version { get; set;}
         public string Qualifier { get; }
         public string Snapshot => IsSnapshot ? MagicStrings.Ver.Snapshot : string.Empty;
         public string Architecture { get; }

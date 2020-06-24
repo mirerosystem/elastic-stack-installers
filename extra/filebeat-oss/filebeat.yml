@@ -1,0 +1,33 @@
+# https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-log.html
+# https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html
+# https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-reloading.html#load-input-config
+
+setup.ilm.enabled: false
+xpack.monitoring.enabled: false
+
+filebeat.config.modules:
+  enabled: false
+
+filebeat.config.inputs:
+  enabled: true
+  path: conf/*.yml
+
+output.logstash:
+  enabled: true
+  hosts: ${BLUECATS_HOST:?환경변수 값으로 BLUECATS_HOST값을 127.0.0.1:7700 과 같은 형태로 추가하세요.}
+
+processors:
+- add_locale: ~
+- add_host_metadata: 
+    netinfo.enabled: true  
+- add_fields:
+    target: beat
+    fields:
+      version: VERSION_INFO_HERE
+- add_tags:
+    tags: ${BLUECATS_SITE:?환경변수 값으로 BLUECATS_SITE을 S1 혹은 16L 과 같은 형태로 추가하세요.}
+- add_tags:
+    tags: [dms, dms50]
+    when: 
+      equals:
+        mirero.dms50: true

@@ -8,7 +8,7 @@ namespace Elastic.Installer
 
         public static class Beats
         {
-            public static readonly string Name = "Beats";
+            public static readonly string Name = "BLUE CATS";
 
             public static readonly string Description =
                 "Beats is the platform for single-purpose data shippers. They send data " +
@@ -28,6 +28,8 @@ namespace Elastic.Installer
             public static readonly string DotMsi = ".msi";
             public static readonly string DotCmd = ".cmd";
             public static readonly string DotZip = ".zip";
+            public static readonly string DotTxt = ".txt";
+            public static readonly string DotMd = ".md";
         }
 
         public static class Files
@@ -57,6 +59,7 @@ namespace Elastic.Installer
             public static readonly string Bin = "bin";
             public static readonly string In = "in";
             public static readonly string Out = "out";
+            public static readonly string Extra = "extra";
             public static readonly string Tools = "tools";
             public static readonly string Installer = "installer";
             public static readonly string Resources = "resources";

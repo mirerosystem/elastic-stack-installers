@@ -17,6 +17,10 @@ namespace Elastic.Installer
         protected static readonly Lazy<string> lazyBinDir = new Lazy<string>(
             () => Path.Combine(lazyBuildRoot.Value, MagicStrings.Dirs.Bin));
 
+        public string ExtraDir => lazyExtraDir.Value;
+        protected static readonly Lazy<string> lazyExtraDir = new Lazy<string>(
+            () => Path.Combine(lazyBuildRoot.Value, MagicStrings.Dirs.Extra));
+
         public string ToolsDir => lazyToolsDir.Value;
         protected static readonly Lazy<string> lazyToolsDir = new Lazy<string>(
             () => Path.Combine(lazyBuildRoot.Value, MagicStrings.Dirs.Tools));

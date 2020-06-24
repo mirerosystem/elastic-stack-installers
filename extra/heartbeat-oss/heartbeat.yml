@@ -1,0 +1,44 @@
+setup.ilm.enabled: false
+xpack.monitoring.enabled: false
+
+output.logstash:
+  enabled: true
+  hosts: ["${BLUECATS_HOST:?환경변수 값으로 BLUECATS_HOST값을 127.0.0.1:7700 과 같은 형태로 추가하세요.}"]
+
+heartbeat.monitors:
+- type: tcp
+  schedule: '@every 30s'
+  hosts:  ${BLUECATS_HEARTBEAT_TCP_TARGETS:''}
+  ipv4: true
+  ipv6: true
+  mode: any
+  timeout: 10s
+
+- type: http
+  schedule: '@every 30s'
+  hosts:  ${BLUECATS_HEARTBEAT_HTTP_TARGETS:''}
+  ipv4: true
+  ipv6: true
+  mode: any
+  timeout: 10s
+
+processors:
+- add_locale: ~
+- add_host_metadata: 
+    netinfo.enabled: true  
+- add_fields:
+    target: beat
+    fields:
+      version: VERSION_INFO_HERE    
+- add_tags:
+    tags: ${BLUECATS_SITE:?환경변수 값으로 BLUECATS_SITE을 S1 혹은 16L 과 같은 형태로 추가하세요.}
+- add_fields:
+    target: mirero
+    fields:
+      kafka_topic: heartbeat
+      dms50: ${BLUECATS_DMS50:false}
+- add_tags:
+    tags: [dms, dms50]
+    when: 
+      equals:
+        mirero.dms50: true      

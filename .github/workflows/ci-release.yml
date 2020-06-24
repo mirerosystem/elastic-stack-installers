@@ -1,0 +1,81 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+    
+env:
+  BEAT_VERSION: 7.7
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - id: get_version
+      uses: seungyongshim/get-version-action@v1.3
+    - id: get_release
+      uses: bruceadams/get-release@v1.2.0          
+    - uses: actions/checkout@v2
+    - name: release 폴더 생성
+      run: |
+        mkdir release
+    - name: 버전 추가
+      run: |
+        get-childitem ./extra -recurse -include *.yml | ForEach-Object {(get-content -encoding utf8 $_.FullName) -replace 'VERSION_INFO_HERE', $env:GITHUB_VERSION | out-file -encoding utf8 $_.FullName}        
+      env:
+        GITHUB_VERSION: ${{ steps.get_version.outputs.version }}        
+    - name: Build MSI
+      run: |
+        ./build build --cid $env:BEAT_VERSION --bitness x86 filebeat-oss metricbeat-oss winlogbeat-oss heartbeat-oss packetbeat-oss
+      env:
+        GITHUB_VERSION: ${{ steps.get_version.outputs.version }}
+    - name: Copy MSI
+      run: |
+        Copy-Item "./bin/out/*/*.msi"  -Destination "./release"
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }} 
+          asset_path: ./release/filebeat.msi
+          asset_name: filebeat.msi
+          asset_content_type: application/octet-stream
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }} 
+          asset_path: ./release/metricbeat.msi
+          asset_name: metricbeat.msi
+          asset_content_type: application/octet-stream
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }} 
+          asset_path: ./release/winlogbeat.msi
+          asset_name: winlogbeat.msi
+          asset_content_type: application/octet-stream          
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }} 
+          asset_path: ./release/heartbeat.msi
+          asset_name: heartbeat.msi
+          asset_content_type: application/octet-stream          
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }} 
+          asset_path: ./release/packetbeat.msi
+          asset_name: packetbeat.msi
+          asset_content_type: application/octet-stream          
