@@ -16,7 +16,7 @@ jobs:
     - id: get_version
       uses:  seungyongshim/get-version-action@v1.3
     - id: get_release
-      uses: bruceadams/get-release@v1.2.0          
+      uses: bruceadams/get-release@v1
     - uses: actions/checkout@v2
     - name: release 폴더 생성
       run: |
