@@ -26,11 +26,13 @@ namespace Elastic.PackageCompiler.Beats
             if (!ArtifactPackage.FromFilename(opts.PackageName, out var ap))
                 throw new Exception("Unable to parse file name: " + opts.PackageName);
 
+            ap.Version = Environment.GetEnvironmentVariable("GITHUB_VERSION").Trim('v');
+
             var pc = config.GetProductConfig(ap.TargetName);
 
             var companyName = MagicStrings.Elastic;
             var productSetName = MagicStrings.Beats.Name;
-            var displayName = MagicStrings.Beats.Name + " " + ap.TargetName;
+            var displayName = companyName + " " + MagicStrings.Beats.Name + " " + ap.TargetName;
             var exeName = ap.CanonicalTargetName + MagicStrings.Ext.DotExe;
 
             // Generate UUID v5 from product properties.
@@ -47,7 +49,7 @@ namespace Elastic.PackageCompiler.Beats
 
                 Description = pc.Description,
 
-                OutFileName = Path.Combine(opts.PackageOutDir, opts.PackageName),
+                OutFileName = Path.Combine(opts.PackageOutDir, opts.ShortPackageName),
                 Version = new Version(ap.Version),
 
                 // We massage LICENSE.txt into .rtf below

@@ -58,3 +58,6 @@ src/.idea/
 
 # Test cmd files
 src/*.cmd
+
+#etc
+.vscode/
