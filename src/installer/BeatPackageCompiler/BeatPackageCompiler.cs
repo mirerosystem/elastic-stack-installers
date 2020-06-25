@@ -16,8 +16,6 @@ namespace Elastic.PackageCompiler.Beats
     {
         static void Main(string[] args)
         {
-            foreach(string arg in args) Console.WriteLine(arg);
-
             var opts = CmdLineOptions.Parse(args);
 
             var config = BuildConfiguration.Read(
@@ -28,7 +26,6 @@ namespace Elastic.PackageCompiler.Beats
             if (!ArtifactPackage.FromFilename(opts.PackageName, out var ap))
                 throw new Exception("Unable to parse file name: " + opts.PackageName);
 
-            // Console.WriteLine("GITHUB_VERSION : {0}", Environment.GetEnvironmentVariable("GITHUB_VERSION"));
             ap.Version = Environment.GetEnvironmentVariable("GITHUB_VERSION").Trim('v');
 
             var pc = config.GetProductConfig(ap.TargetName);
@@ -191,80 +188,111 @@ namespace Elastic.PackageCompiler.Beats
                             new Files(Path.Combine(
                                 opts.PackageInDir,
                                 dirName,
-                                MagicStrings.Files.All)))));
+                                MagicStrings.Files.All))))
+            );
 
             packageContents.Add(pc.IsWindowsService ? service : null);
 
-            // Add a note to the final screen and a checkbox to open the directory of .example.yml file
-            var beatConfigExampleFileName = ap.CanonicalTargetName + ".example" + MagicStrings.Ext.DotYml;
-            var beatConfigExampleFileId = beatConfigExampleFileName + "_" + (uint) beatConfigExampleFileName.GetHashCode32();
+            //            // Add a note to the final screen and a checkbox to open the directory of .example.yml file
+            //            var beatConfigExampleFileName = ap.CanonicalTargetName + ".example" + MagicStrings.Ext.DotYml;
+            //            var beatConfigExampleFileId = beatConfigExampleFileName + "_" + (uint) beatConfigExampleFileName.GetHashCode32();
+
+            //            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALTEXT",
+            //                $"NOTE: Only Administrators can modify configuration files! We put an example configuration file " +
+            //                $"in the data directory caled {ap.CanonicalTargetName}.example.yml. Please copy this example file to " +
+            //                $"{ap.CanonicalTargetName}.yml and make changes according to your environment. Once {ap.CanonicalTargetName}.yml " +
+            //                $"is created, you can configure {ap.CanonicalTargetName} from your favorite shell (in an elevated prompt) " +
+            //                $"and then start {serviceDisplayName} Windows service.\r\n"));
+
+            //            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALCHECKBOX", "1"));
+            //            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT",
+            //                $"Open {ap.CanonicalTargetName} data directory in Windows Explorer"));
+
+            //            // We'll open the folder for now
+            //            // TODO: select file in explorer window
+            //            project.AddProperty(new Property(
+            //                "WixShellExecTarget",
+            //                $"[$Component.{beatConfigExampleFileId}]"));
+
+            //            project.AddWixFragment("Wix/Product",
+            //                XElement.Parse(@"
+            //<CustomAction
+            //    Id=""CA_SelectExampleYamlInExplorer""
+            //    BinaryKey = ""WixCA""
+            //    DllEntry = ""WixShellExec""
+            //    Impersonate = ""yes""
+            ///>"),
+            //                XElement.Parse(@"
+            //<UI>
+            //    <Publish
+            //        Dialog=""ExitDialog""
+            //        Control=""Finish""
+            //        Event=""DoAction"" 
+            //        Value=""CA_SelectExampleYamlInExplorer"">WIXUI_EXITDIALOGOPTIONALCHECKBOX=1 and NOT Installed
+            //    </Publish>
+            //</UI>"));
+
+            //            var dataContents = new DirectoryInfo(opts.PackageInDir)
+            //                .GetFiles(MagicStrings.Files.AllDotYml, SearchOption.TopDirectoryOnly)
+            //                .Select(fi =>
+            //                {
+            //                    var wf = new WixSharp.File(fi.FullName);
+
+            //                    // rename main config file to hide it from MSI engine and keep customizations
+            //                    if (string.Compare(
+            //                        fi.Name,
+            //                        ap.CanonicalTargetName + MagicStrings.Ext.DotYml,
+            //                        StringComparison.OrdinalIgnoreCase) == 0)
+            //                    {
+            //                        wf.Attributes.Add("Name", beatConfigExampleFileName);
+            //                        wf.Id = new Id(beatConfigExampleFileId);
+            //                    }
+
+            //                    return wf;
+            //                })
+            //                .ToList<WixEntity>();
+
+            //            dataContents.AddRange(
+            //                pc.MutableDirs
+            //                    .Select(dirName =>
+            //                    {
+            //                        var dirPath = Path.Combine(opts.PackageInDir, dirName);
+
+            //                        return Directory.Exists(dirPath)
+            //                            ? new Dir(dirName, new Files(Path.Combine(dirPath, MagicStrings.Files.All)))
+            //                            : null;
+            //                    })
+            //                    .Where(dir => dir != null));
 
             project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALTEXT",
-                $"NOTE: Only Administrators can modify configuration files! We put an example configuration file " +
-                $"in the data directory caled {ap.CanonicalTargetName}.example.yml. Please copy this example file to " +
-                $"{ap.CanonicalTargetName}.yml and make changes according to your environment. Once {ap.CanonicalTargetName}.yml " +
-                $"is created, you can configure {ap.CanonicalTargetName} from your favorite shell (in an elevated prompt) " +
-                $"and then start {serviceDisplayName} Windows service.\r\n"));
+                $"NOTE: {serviceDisplayName} Windows service.\n"));
 
-            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALCHECKBOX", "1"));
-            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT",
-                $"Open {ap.CanonicalTargetName} data directory in Windows Explorer"));
-
-            // We'll open the folder for now
-            // TODO: select file in explorer window
-            project.AddProperty(new Property(
-                "WixShellExecTarget",
-                $"[$Component.{beatConfigExampleFileId}]"));
-
-            project.AddWixFragment("Wix/Product",
-                XElement.Parse(@"
-<CustomAction
-    Id=""CA_SelectExampleYamlInExplorer""
-    BinaryKey = ""WixCA""
-    DllEntry = ""WixShellExec""
-    Impersonate = ""yes""
-/>"),
-                XElement.Parse(@"
-<UI>
-    <Publish
-        Dialog=""ExitDialog""
-        Control=""Finish""
-        Event=""DoAction"" 
-        Value=""CA_SelectExampleYamlInExplorer"">WIXUI_EXITDIALOGOPTIONALCHECKBOX=1 and NOT Installed
-    </Publish>
-</UI>"));
-
-            var dataContents = new DirectoryInfo(opts.PackageInDir)
-                .GetFiles(MagicStrings.Files.AllDotYml, SearchOption.TopDirectoryOnly)
-                .Select(fi =>
-                {
-                    var wf = new WixSharp.File(fi.FullName);
-
-                    // rename main config file to hide it from MSI engine and keep customizations
-                    if (string.Compare(
-                        fi.Name,
-                        ap.CanonicalTargetName + MagicStrings.Ext.DotYml,
-                        StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        wf.Attributes.Add("Name", beatConfigExampleFileName);
-                        wf.Id = new Id(beatConfigExampleFileId);
-                    }
-
-                    return wf;
-                })
-                .ToList<WixEntity>();
+            var dataContents = new List<WixEntity>();
+            var extraDir = Path.Combine(opts.ExtraDir, ap.TargetName);
 
             dataContents.AddRange(
-                pc.MutableDirs
-                    .Select(dirName =>
+                new DirectoryInfo(extraDir)
+                    .GetFiles(MagicStrings.Files.AllDotYml, SearchOption.TopDirectoryOnly)
+                    .Select(fi =>
                     {
-                        var dirPath = Path.Combine(opts.PackageInDir, dirName);
+                        var wf = new WixSharp.File(fi.FullName);
+                        return wf;
+                    }));
 
-                        return Directory.Exists(dirPath)
-                            ? new Dir(dirName, new Files(Path.Combine(dirPath, MagicStrings.Files.All)))
-                            : null;
-                    })
-                    .Where(dir => dir != null));
+            dataContents.AddRange(
+                new DirectoryInfo(extraDir)
+                    .GetDirectories()
+                    .Select(dir => dir.Name)
+                    .Select(dirName =>
+                        new Dir(
+                            dirName,
+                            new Files(Path.Combine(
+                                extraDir,
+                                dirName,
+                                MagicStrings.Files.All)))));
+
+
+
 
             // Drop CLI shim on disk
             var cliShimScriptPath = Path.Combine(
@@ -293,27 +321,29 @@ namespace Elastic.PackageCompiler.Beats
                     new Dir(companyName,
                         new Dir(productSetName,
                             new Dir(ap.CanonicalTargetName, dataContents.ToArray())
-                            {
-                                GenericItems = new []
-                                {
-                                    /*
-                                    This will *replace* ACL on the {beatname} directory:
+                            , new DirPermission("Users", "[MachineName]", GenericPermission.All)
+                            //{
+                            //    GenericItems = new []
+                            //    {
+                            //        /*
+                            //        This will *replace* ACL on the {beatname} directory:
 
-                                    Directory tree:
-                                        NT AUTHORITY\SYSTEM:(OI)(CI)F
-                                        BUILTIN\Administrators:(OI)(CI)F
-                                        BUILTIN\Users:(CI)R
+                            //        Directory tree:
+                            //            NT AUTHORITY\SYSTEM:(OI)(CI)F
+                            //            BUILTIN\Administrators:(OI)(CI)F
+                            //            BUILTIN\Users:(CI)R
 
-                                    Files:
-                                        NT AUTHORITY\SYSTEM:(ID)F
-                                        BUILTIN\Administrators:(ID)F
-                                    */
+                            //        Files:
+                            //            NT AUTHORITY\SYSTEM:(ID)F
+                            //            BUILTIN\Administrators:(ID)F
+                            //        */
 
-                                    new MsiLockPermissionEx(
-                                        "D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;CI;0x1200a9;;;BU)",
-                                        ap.Is64Bit)
-                                }
-                            })))
+                            //        new MsiLockPermissionEx(
+                            //            "D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;CI;0x1200a9;;;BU)",
+                            //            ap.Is64Bit)
+                            //    }
+                            //}
+		        )))
             };
 
             // CLI Shim path
