@@ -16,6 +16,8 @@ namespace Elastic.PackageCompiler.Beats
     {
         static void Main(string[] args)
         {
+            foreach(string arg in args) Console.WriteLine(arg);
+
             var opts = CmdLineOptions.Parse(args);
 
             var config = BuildConfiguration.Read(
@@ -26,8 +28,8 @@ namespace Elastic.PackageCompiler.Beats
             if (!ArtifactPackage.FromFilename(opts.PackageName, out var ap))
                 throw new Exception("Unable to parse file name: " + opts.PackageName);
 
-            Console.WriteLine("GITHUB_VERSION : {0}", Environment.GetEnvironmentVariable("GITHUB_VERSION"));
-            // ap.Version = Environment.GetEnvironmentVariable("GITHUB_VERSION").Trim('v');
+            // Console.WriteLine("GITHUB_VERSION : {0}", Environment.GetEnvironmentVariable("GITHUB_VERSION"));
+            ap.Version = Environment.GetEnvironmentVariable("GITHUB_VERSION").Trim('v');
 
             var pc = config.GetProductConfig(ap.TargetName);
 
@@ -83,7 +85,7 @@ namespace Elastic.PackageCompiler.Beats
             {
                 Contact = companyName,
                 Manufacturer = companyName,
-                UrlInfoAbout = "https://www.elastic.co",
+                UrlInfoAbout = "http://www.mirero.co.kr",
 
                 Comments = pc.Description + ". " + MagicStrings.Beats.Description,
 
@@ -164,6 +166,10 @@ namespace Elastic.PackageCompiler.Beats
 
                         // we install/remove service ourselves
                         itm.EndsWith(MagicStrings.Ext.DotPs1, StringComparison.OrdinalIgnoreCase) ||
+
+                        itm.EndsWith(MagicStrings.Ext.DotTxt, StringComparison.OrdinalIgnoreCase) ||
+
+                        itm.EndsWith(MagicStrings.Ext.DotMd, StringComparison.OrdinalIgnoreCase) ||
 
                         // .exe must be excluded for service configuration to work
                         (pc.IsWindowsService && itm.EndsWith(exeName, StringComparison.OrdinalIgnoreCase))
