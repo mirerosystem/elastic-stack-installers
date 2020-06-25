@@ -26,11 +26,12 @@ namespace Elastic.PackageCompiler.Beats
             if (!ArtifactPackage.FromFilename(opts.PackageName, out var ap))
                 throw new Exception("Unable to parse file name: " + opts.PackageName);
 
-            ap.Version = Environment.GetEnvironmentVariable("GITHUB_VERSION").Trim('v');
+            Console.WriteLine("GITHUB_VERSION : {0}", Environment.GetEnvironmentVariable("GITHUB_VERSION"));
+            // ap.Version = Environment.GetEnvironmentVariable("GITHUB_VERSION").Trim('v');
 
             var pc = config.GetProductConfig(ap.TargetName);
 
-            var companyName = MagicStrings.Elastic;
+            var companyName = "Mirero";
             var productSetName = MagicStrings.Beats.Name;
             var displayName = companyName + " " + MagicStrings.Beats.Name + " " + ap.TargetName;
             var exeName = ap.CanonicalTargetName + MagicStrings.Ext.DotExe;
@@ -143,7 +144,7 @@ namespace Elastic.PackageCompiler.Beats
                     Start = SvcStartType.auto,
 
                     // Don't start on install, config file is likely not ready yet
-                    //StartOn = SvcEvent.Install,
+                    StartOn = SvcEvent.Install,
 
                     StopOn = SvcEvent.InstallUninstall_Wait,
                     RemoveOn = SvcEvent.InstallUninstall_Wait,
