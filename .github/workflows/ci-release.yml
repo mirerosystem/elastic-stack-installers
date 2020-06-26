@@ -40,8 +40,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.get_release.outputs.upload_url }} 
-          asset_path: ./release/filebeat.msi
-          asset_name: filebeat.msi
+          asset_path: ./release/Mirero.BLUECATS.Filebeat.msi
+          asset_name: Mirero.BLUECATS.Filebeat.msi
           asset_content_type: application/octet-stream
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1.0.2
@@ -49,8 +49,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.get_release.outputs.upload_url }} 
-          asset_path: ./release/metricbeat.msi
-          asset_name: metricbeat.msi
+          asset_path: ./release/Mirero.BLUECATS.Metricbeat.msi
+          asset_name: Mirero.BLUECATS.Metricbeat.msi
           asset_content_type: application/octet-stream
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1.0.2
@@ -58,8 +58,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.get_release.outputs.upload_url }} 
-          asset_path: ./release/winlogbeat.msi
-          asset_name: winlogbeat.msi
+          asset_path: ./release/Mirero.BLUECATS.Winlogbeat.msi
+          asset_name: Mirero.BLUECATS.Winlogbeat.msi
           asset_content_type: application/octet-stream          
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1.0.2
@@ -67,8 +67,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.get_release.outputs.upload_url }} 
-          asset_path: ./release/heartbeat.msi
-          asset_name: heartbeat.msi
+          asset_path: ./release/Mirero.BLUECATS.Heartbeat.msi
+          asset_name: Mirero.BLUECATS.Heartbeat.msi
           asset_content_type: application/octet-stream          
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1.0.2
@@ -76,6 +76,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.get_release.outputs.upload_url }} 
-          asset_path: ./release/packetbeat.msi
-          asset_name: packetbeat.msi
+          asset_path: ./release/Mirero.BLUECATS.Packetbeat.msi
+          asset_name: Mirero.BLUECATS.Packetbeat.msi
           asset_content_type: application/octet-stream          
