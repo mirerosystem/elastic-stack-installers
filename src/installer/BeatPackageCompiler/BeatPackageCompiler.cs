@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using System.Xml.Schema;
 using BeatPackageCompiler.Properties;
 using ElastiBuild.Extensions;
 using Elastic.Installer;
@@ -16,6 +17,7 @@ namespace Elastic.PackageCompiler.Beats
     {
         static void Main(string[] args)
         {
+            var textInfo = new CultureInfo("en-US", false).TextInfo;
             var opts = CmdLineOptions.Parse(args);
 
             var config = BuildConfiguration.Read(
@@ -32,8 +34,18 @@ namespace Elastic.PackageCompiler.Beats
 
             var companyName = "Mirero";
             var productSetName = MagicStrings.Beats.Name;
-            var displayName = companyName + " " + MagicStrings.Beats.Name + " " + ap.TargetName;
+            var displayName = textInfo.ToTitleCase(companyName + " " + MagicStrings.Beats.Name + " " + ap.CanonicalTargetName);
             var exeName = ap.CanonicalTargetName + MagicStrings.Ext.DotExe;
+            var exeFullPath = Path.Combine(opts.PackageInDir, exeName);
+            var outName = $"{companyName}.{MagicStrings.Beats.Name.Replace(" ", "")}.{textInfo.ToTitleCase(ap.CanonicalTargetName)}";
+            var outExeName = outName + MagicStrings.Ext.DotExe;
+            var outExeFullPath = Path.Combine(opts.PackageInDir, outExeName);
+            var projectDescription = $"{companyName} {MagicStrings.Beats.Name} {textInfo.ToTitleCase(ap.CanonicalTargetName)} {ap.SemVer}";
+
+
+            // renmae exe file
+            if (System.IO.File.Exists(exeFullPath))
+                System.IO.File.Move(exeFullPath, outExeFullPath);
 
             // Generate UUID v5 from product properties.
             // This UUID *must* be stable and unique between Beats.
@@ -47,9 +59,11 @@ namespace Elastic.PackageCompiler.Beats
 
                 Name = $"{displayName} {ap.SemVer} ({ap.Architecture})",
 
-                Description = pc.Description,
+                //Description = pc.Description,
+                Description = projectDescription + ". " + pc.Description,
 
-                OutFileName = Path.Combine(opts.PackageOutDir, opts.ShortPackageName),
+                //OutFileName = Path.Combine(opts.PackageOutDir, opts.ShortPackageName),
+                OutFileName = Path.Combine(opts.PackageOutDir, outName),
                 Version = new Version(ap.Version),
 
                 // We massage LICENSE.txt into .rtf below
@@ -84,7 +98,7 @@ namespace Elastic.PackageCompiler.Beats
                 Manufacturer = companyName,
                 UrlInfoAbout = "http://www.mirero.co.kr",
 
-                Comments = pc.Description + ". " + MagicStrings.Beats.Description,
+                Comments = projectDescription + ". " + pc.Description + ". " + MagicStrings.Beats.Description,
 
                 ProductIcon = Path.Combine(
                     opts.ResDir,
@@ -106,13 +120,14 @@ namespace Elastic.PackageCompiler.Beats
             var beatDataPath = Path.Combine(beatConfigPath, "data");
             var beatLogsPath = Path.Combine(beatConfigPath, "logs");
 
-            var textInfo = new CultureInfo("en-US", false).TextInfo;
-            var serviceDisplayName = $"{companyName} {textInfo.ToTitleCase(ap.TargetName)} {ap.SemVer}";
+            //var serviceDisplayName = $"{companyName} {textInfo.ToTitleCase(ap.TargetName)} {ap.SemVer}";
+            //var serviceName = $"{companyName}.{MagicStrings.Beats.Name.Replace(" ", "")}.{textInfo.ToTitleCase(ap.CanonicalTargetName)}";
+            var serviceDisplayName = $"{companyName} {MagicStrings.Beats.Name} {textInfo.ToTitleCase(ap.CanonicalTargetName)} {ap.SemVer}";
 
             WixSharp.File service = null;
             if (pc.IsWindowsService)
             {
-                service = new WixSharp.File(Path.Combine(opts.PackageInDir, exeName));
+                service = new WixSharp.File(Path.Combine(opts.PackageInDir, outExeName));
 
                 // TODO: CNDL1150 : ServiceConfig functionality is documented in the Windows Installer SDK to 
                 //                  "not [work] as expected." Consider replacing ServiceConfig with the 
@@ -122,9 +137,11 @@ namespace Elastic.PackageCompiler.Beats
                 {
                     Interactive = false,
 
-                    Name = ap.CanonicalTargetName,
+                    //Name = ap.CanonicalTargetName,
+                    Name = outName,
                     DisplayName = serviceDisplayName,
-                    Description = pc.Description,
+                    //Description = pc.Description,
+                    Description = serviceDisplayName,
 
                     DependsOn = new[]
                     {
@@ -150,6 +167,7 @@ namespace Elastic.PackageCompiler.Beats
                 };
             }
 
+            // 기본 프로그램 파일을 포함한다.
             var packageContents = new List<WixEntity>
             {
                 new DirFiles(Path.Combine(opts.PackageInDir, MagicStrings.Files.All), path =>
@@ -169,7 +187,7 @@ namespace Elastic.PackageCompiler.Beats
                         itm.EndsWith(MagicStrings.Ext.DotMd, StringComparison.OrdinalIgnoreCase) ||
 
                         // .exe must be excluded for service configuration to work
-                        (pc.IsWindowsService && itm.EndsWith(exeName, StringComparison.OrdinalIgnoreCase))
+                        (pc.IsWindowsService && itm.EndsWith(outExeName, StringComparison.OrdinalIgnoreCase))
                     ;
 
                     // this is an "include" filter
@@ -188,88 +206,17 @@ namespace Elastic.PackageCompiler.Beats
                             new Files(Path.Combine(
                                 opts.PackageInDir,
                                 dirName,
-                                MagicStrings.Files.All))))
-            );
+                                MagicStrings.Files.All)))));
 
             packageContents.Add(pc.IsWindowsService ? service : null);
-
-            //            // Add a note to the final screen and a checkbox to open the directory of .example.yml file
-            //            var beatConfigExampleFileName = ap.CanonicalTargetName + ".example" + MagicStrings.Ext.DotYml;
-            //            var beatConfigExampleFileId = beatConfigExampleFileName + "_" + (uint) beatConfigExampleFileName.GetHashCode32();
-
-            //            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALTEXT",
-            //                $"NOTE: Only Administrators can modify configuration files! We put an example configuration file " +
-            //                $"in the data directory caled {ap.CanonicalTargetName}.example.yml. Please copy this example file to " +
-            //                $"{ap.CanonicalTargetName}.yml and make changes according to your environment. Once {ap.CanonicalTargetName}.yml " +
-            //                $"is created, you can configure {ap.CanonicalTargetName} from your favorite shell (in an elevated prompt) " +
-            //                $"and then start {serviceDisplayName} Windows service.\r\n"));
-
-            //            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALCHECKBOX", "1"));
-            //            project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT",
-            //                $"Open {ap.CanonicalTargetName} data directory in Windows Explorer"));
-
-            //            // We'll open the folder for now
-            //            // TODO: select file in explorer window
-            //            project.AddProperty(new Property(
-            //                "WixShellExecTarget",
-            //                $"[$Component.{beatConfigExampleFileId}]"));
-
-            //            project.AddWixFragment("Wix/Product",
-            //                XElement.Parse(@"
-            //<CustomAction
-            //    Id=""CA_SelectExampleYamlInExplorer""
-            //    BinaryKey = ""WixCA""
-            //    DllEntry = ""WixShellExec""
-            //    Impersonate = ""yes""
-            ///>"),
-            //                XElement.Parse(@"
-            //<UI>
-            //    <Publish
-            //        Dialog=""ExitDialog""
-            //        Control=""Finish""
-            //        Event=""DoAction"" 
-            //        Value=""CA_SelectExampleYamlInExplorer"">WIXUI_EXITDIALOGOPTIONALCHECKBOX=1 and NOT Installed
-            //    </Publish>
-            //</UI>"));
-
-            //            var dataContents = new DirectoryInfo(opts.PackageInDir)
-            //                .GetFiles(MagicStrings.Files.AllDotYml, SearchOption.TopDirectoryOnly)
-            //                .Select(fi =>
-            //                {
-            //                    var wf = new WixSharp.File(fi.FullName);
-
-            //                    // rename main config file to hide it from MSI engine and keep customizations
-            //                    if (string.Compare(
-            //                        fi.Name,
-            //                        ap.CanonicalTargetName + MagicStrings.Ext.DotYml,
-            //                        StringComparison.OrdinalIgnoreCase) == 0)
-            //                    {
-            //                        wf.Attributes.Add("Name", beatConfigExampleFileName);
-            //                        wf.Id = new Id(beatConfigExampleFileId);
-            //                    }
-
-            //                    return wf;
-            //                })
-            //                .ToList<WixEntity>();
-
-            //            dataContents.AddRange(
-            //                pc.MutableDirs
-            //                    .Select(dirName =>
-            //                    {
-            //                        var dirPath = Path.Combine(opts.PackageInDir, dirName);
-
-            //                        return Directory.Exists(dirPath)
-            //                            ? new Dir(dirName, new Files(Path.Combine(dirPath, MagicStrings.Files.All)))
-            //                            : null;
-            //                    })
-            //                    .Where(dir => dir != null));
 
             project.AddProperty(new Property("WIXUI_EXITDIALOGOPTIONALTEXT",
                 $"NOTE: {serviceDisplayName} Windows service.\n"));
 
             var dataContents = new List<WixEntity>();
-            var extraDir = Path.Combine(opts.ExtraDir, ap.TargetName);
+            var extraDir = Path.Combine(opts.ExtraDir, ap.TargetName); // 최상위 extra 폴더
 
+            // extra 폴더 위치의 .yml 파일들을 Contents로 포함한다.
             dataContents.AddRange(
                 new DirectoryInfo(extraDir)
                     .GetFiles(MagicStrings.Files.AllDotYml, SearchOption.TopDirectoryOnly)
@@ -279,6 +226,7 @@ namespace Elastic.PackageCompiler.Beats
                         return wf;
                     }));
 
+            //  extra 폴더의 모드 하부 폴더 위치의 모든 파일들을 Contents로 포함한다.
             dataContents.AddRange(
                 new DirectoryInfo(extraDir)
                     .GetDirectories()
@@ -290,8 +238,6 @@ namespace Elastic.PackageCompiler.Beats
                                 extraDir,
                                 dirName,
                                 MagicStrings.Files.All)))));
-
-
 
 
             // Drop CLI shim on disk
@@ -322,28 +268,7 @@ namespace Elastic.PackageCompiler.Beats
                         new Dir(productSetName,
                             new Dir(ap.CanonicalTargetName, dataContents.ToArray())
                             , new DirPermission("Users", "[MachineName]", GenericPermission.All)
-                            //{
-                            //    GenericItems = new []
-                            //    {
-                            //        /*
-                            //        This will *replace* ACL on the {beatname} directory:
-
-                            //        Directory tree:
-                            //            NT AUTHORITY\SYSTEM:(OI)(CI)F
-                            //            BUILTIN\Administrators:(OI)(CI)F
-                            //            BUILTIN\Users:(CI)R
-
-                            //        Files:
-                            //            NT AUTHORITY\SYSTEM:(ID)F
-                            //            BUILTIN\Administrators:(ID)F
-                            //        */
-
-                            //        new MsiLockPermissionEx(
-                            //            "D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;CI;0x1200a9;;;BU)",
-                            //            ap.Is64Bit)
-                            //    }
-                            //}
-		        )))
+		           )))
             };
 
             // CLI Shim path
