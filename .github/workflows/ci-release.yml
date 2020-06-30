@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - id: get_version
-      uses:  seungyongshim/get-version-action@v1.3
+      uses:  mirerosystem/get-version-action@v1.3
     - id: get_release
       uses: bruceadams/get-release@v1.2.0
     - uses: actions/checkout@v2
