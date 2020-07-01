@@ -1,0 +1,83 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [], \"index\": \"metricbeat-*\"}"
+                },
+                "title": "Container CPU usage [Metricbeat System] ECS",
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"field\": \"system.process.cgroup.cpuacct.stats.user.ns\", \"customLabel\": \"CPU user\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"max\", \"id\": \"1\"}, {\"params\": {\"field\": \"system.process.cgroup.cpu.cfs.quota.us\", \"customLabel\": \"CPU quota\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"max\", \"id\": \"2\"}, {\"params\": {\"size\": 5, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"system.process.cgroup.id\", \"customLabel\": \"Container ID\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"3\"}, {\"params\": {\"field\": \"system.process.cgroup.cpu.stats.throttled.ns\", \"customLabel\": \"CPU throttling\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"max\", \"id\": \"4\"}, {\"params\": {\"field\": \"system.process.cgroup.cpuacct.stats.system.ns\", \"customLabel\": \"CPU kernel\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"max\", \"id\": \"5\"}, {\"params\": {\"size\": 5, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"process.name\", \"customLabel\": \"Process name\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"6\"}], \"params\": {\"perPage\": 10, \"showPartialRows\": false, \"showMeticsAtAllLevels\": false, \"showTotal\": false, \"totalFunc\": \"sum\", \"sort\": {\"direction\": null, \"columnIndex\": null}}, \"title\": \"Container CPU usage [Metricbeat System] ECS\", \"type\": \"table\"}"
+            },
+            "id": "Container-CPU-usage-ecs",
+            "type": "visualization",
+            "version": 1
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": []}"
+                },
+                "title": "System Navigation [Metricbeat System] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"aggs\": [], \"params\": {\"fontSize\": 12, \"markdown\": \"[System Overview](#/dashboard/Metricbeat-system-overview-ecs)  | [Host Overview](#/dashboard/79ffd6e0-faa0-11e6-947f-177f697178b8-ecs) |\\n[Containers overview](#/dashboard/CPU-slash-Memory-per-container-ecs)\"}, \"title\": \"System Navigation [Metricbeat System] ECS\", \"type\": \"markdown\"}"
+            },
+            "id": "System-Navigation-ecs",
+            "type": "visualization",
+            "version": 3
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [], \"index\": \"metricbeat-*\"}"
+                },
+                "title": "Container Memory stats [Metricbeat System] ECS",
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"field\": \"system.process.cgroup.memory.mem.usage.bytes\", \"customLabel\": \"Usage\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"13\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.mem.usage.max.bytes\", \"customLabel\": \"Max usage\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"14\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.page_faults\", \"customLabel\": \"Page faults\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"1\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.pages_in\", \"customLabel\": \"Pages in memory\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"2\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.pages_out\", \"customLabel\": \"Pages out of memory\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"3\"}, {\"params\": {\"size\": 50, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"system.process.cgroup.id\", \"customLabel\": \"Container ID\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"4\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.inactive_file.bytes\", \"customLabel\": \"Inactive files\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"5\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.major_page_faults\", \"customLabel\": \"# Major page faults\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"6\"}, {\"params\": {\"size\": 5, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"process.name\", \"customLabel\": \"Process name\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"8\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.mem.failures\", \"customLabel\": \"Failures\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"12\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.kmem_tcp.usage.bytes\", \"customLabel\": \"TCP buffers\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"10\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.rss_huge.bytes\", \"customLabel\": \"Huge pages\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"11\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.rss.bytes\", \"customLabel\": \"Swap caches\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"7\"}, {\"params\": {\"field\": \"system.process.cgroup.memory.stats.swap.bytes\", \"customLabel\": \"Swap usage\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"15\"}, {\"params\": {\"field\": \"system.process.cgroup.blkio.total.ios\", \"customLabel\": \"Block I/O\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"16\"}], \"params\": {\"perPage\": 10, \"showPartialRows\": false, \"showMeticsAtAllLevels\": false, \"showTotal\": false, \"totalFunc\": \"sum\", \"sort\": {\"direction\": null, \"columnIndex\": null}}, \"title\": \"Container Memory stats [Metricbeat System] ECS\", \"type\": \"table\"}"
+            },
+            "id": "Container-Memory-stats-ecs",
+            "type": "visualization",
+            "version": 1
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [], \"index\": \"metricbeat-*\"}"
+                },
+                "title": "Container Block IO [Metricbeat System] ECS",
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"field\": \"system.process.cgroup.blkio.total.bytes\", \"customLabel\": \"Total\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"1\"}, {\"params\": {\"field\": \"system.process.cgroup.blkio.total.ios\", \"customLabel\": \"I/O\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"avg\", \"id\": \"2\"}, {\"params\": {\"size\": 5, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"system.process.cgroup.id\", \"customLabel\": \"Container ID\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"3\"}, {\"params\": {\"size\": 5, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"process.name\", \"customLabel\": \"Process name\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"4\"}], \"params\": {\"perPage\": 10, \"showPartialRows\": false, \"showMeticsAtAllLevels\": false, \"showTotal\": false, \"totalFunc\": \"sum\", \"sort\": {\"direction\": null, \"columnIndex\": null}}, \"title\": \"Container Block IO [Metricbeat System] ECS\", \"type\": \"table\"}"
+            },
+            "id": "Container-Block-IO-ecs",
+            "type": "visualization",
+            "version": 1
+        },
+        {
+            "attributes": {
+                "description": "Overview of container metrics",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [], \"version\": true, \"highlightAll\": true}"
+                },
+                "optionsJSON": "{\"darkTheme\": false}",
+                "panelsJSON": "[{\"type\": \"visualization\", \"row\": 2, \"size_y\": 3, \"id\": \"Container-CPU-usage-ecs\", \"col\": 1, \"panelIndex\": 2, \"size_x\": 12}, {\"type\": \"visualization\", \"row\": 1, \"size_y\": 1, \"id\": \"System-Navigation-ecs\", \"col\": 1, \"panelIndex\": 3, \"size_x\": 12}, {\"type\": \"visualization\", \"row\": 5, \"size_y\": 3, \"id\": \"Container-Memory-stats-ecs\", \"col\": 1, \"panelIndex\": 4, \"size_x\": 12}, {\"type\": \"visualization\", \"row\": 8, \"size_y\": 4, \"id\": \"Container-Block-IO-ecs\", \"col\": 1, \"panelIndex\": 5, \"size_x\": 12}]",
+                "timeRestore": false,
+                "title": "[Metricbeat System] Containers overview ECS",
+                "uiStateJSON": "{\"P-4\": {\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}, \"P-2\": {\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}, \"P-5\": {\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}}",
+                "version": 1
+            },
+            "id": "CPU-slash-Memory-per-container-ecs",
+            "type": "dashboard",
+            "version": 1
+        }
+    ],
+    "version": "6.0.0-rc1-SNAPSHOT"
+}

@@ -2,7 +2,7 @@
   "profiles": {
     "BeatPackageCompiler.netcore": {
       "commandName": "Project",
-      "commandLineArgs": "--package=\"metricbeat-oss-7.7.2-SNAPSHOT-windows-x86_64\"  --keep-temp-files --verbose",
+      "commandLineArgs": "--package=\"winlogbeat-oss-7.7.2-SNAPSHOT-windows-x86\"  --keep-temp-files --verbose",
       "workingDirectory": "$(SolutionDir)"
     }
   }

@@ -1,0 +1,23 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "HAProxy frontend metrics",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [], \"version\": true, \"highlightAll\": true}"
+                },
+                "optionsJSON": "{\"hidePanelTitles\": false, \"darkTheme\": false, \"useMargins\": true}",
+                "panelsJSON": "[{\"gridData\": {\"y\": 0, \"h\": 3, \"i\": \"2\", \"w\": 6, \"x\": 0}, \"version\": \"6.2.2\", \"panelIndex\": \"2\", \"type\": \"visualization\", \"id\": \"a64b4fd0-471c-11e8-bc13-1397384faad3-ecs\"}, {\"gridData\": {\"y\": 0, \"h\": 3, \"i\": \"3\", \"w\": 6, \"x\": 6}, \"version\": \"6.2.2\", \"panelIndex\": \"3\", \"type\": \"visualization\", \"id\": \"86159190-47c5-11e8-bc13-1397384faad3-ecs\"}]",
+                "timeRestore": false,
+                "title": "[Metricbeat HAProxy] Frontend ECS",
+                "version": 1
+            },
+            "id": "d5878d00-47c5-11e8-bc13-1397384faad3-ecs",
+            "type": "dashboard",
+            "updated_at": "2018-04-24T18:32:51.945Z",
+            "version": 5
+        }
+    ],
+    "version": "6.2.2"
+}

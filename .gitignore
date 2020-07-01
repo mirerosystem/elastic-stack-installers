@@ -28,7 +28,10 @@
 [Rr]elease/
 x64/
 x86/
-[Bb]in/
+[Bb]in/compiler
+[Bb]in/in/*.zip
+[Bb]in/out
+[Bb]in/WixToolset
 [Oo]bj/
 *.wixobj
 

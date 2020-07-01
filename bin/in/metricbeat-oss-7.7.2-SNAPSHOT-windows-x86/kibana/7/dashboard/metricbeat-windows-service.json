@@ -1,0 +1,129 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [], \"index\": \"metricbeat-*\"}"
+                },
+                "title": "Service States [Metricbeat Windows] ECS",
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"sortField\": \"@timestamp\", \"sortOrder\": \"desc\", \"size\": 1, \"aggregate\": \"concat\", \"field\": \"@timestamp\", \"customLabel\": \"Latest Report\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"top_hits\", \"id\": \"1\"}, {\"params\": {\"size\": 100, \"orderBy\": \"_term\", \"order\": \"asc\", \"field\": \"windows.service.display_name\", \"customLabel\": \"Service\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"2\"}, {\"params\": {\"size\": 5, \"orderBy\": \"_term\", \"order\": \"desc\", \"field\": \"host.name\", \"customLabel\": \"Host\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"5\"}, {\"params\": {\"size\": 1, \"orderAgg\": {\"params\": {\"field\": \"@timestamp\"}, \"schema\": {\"hideCustomLabel\": true, \"max\": null, \"aggFilter\": [\"!top_hits\", \"!percentiles\", \"!median\", \"!std_dev\", \"!derivative\", \"!moving_avg\", \"!serial_diff\", \"!cumulative_sum\", \"!avg_bucket\", \"!max_bucket\", \"!min_bucket\", \"!sum_bucket\"], \"params\": [], \"editor\": false, \"min\": 0, \"group\": \"none\", \"title\": \"Order Agg\", \"name\": \"orderAgg\", \"deprecate\": false}, \"enabled\": true, \"type\": \"max\", \"id\": \"3-orderAgg\"}, \"orderBy\": \"custom\", \"order\": \"desc\", \"field\": \"windows.service.state\", \"customLabel\": \"State\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"3\"}, {\"params\": {\"size\": 1, \"orderAgg\": {\"params\": {\"field\": \"@timestamp\"}, \"schema\": {\"hideCustomLabel\": true, \"max\": null, \"aggFilter\": [\"!top_hits\", \"!percentiles\", \"!median\", \"!std_dev\", \"!derivative\", \"!moving_avg\", \"!serial_diff\", \"!cumulative_sum\", \"!avg_bucket\", \"!max_bucket\", \"!min_bucket\", \"!sum_bucket\"], \"params\": [], \"editor\": false, \"min\": 0, \"group\": \"none\", \"title\": \"Order Agg\", \"name\": \"orderAgg\", \"deprecate\": false}, \"enabled\": true, \"type\": \"max\", \"id\": \"4-orderAgg\"}, \"orderBy\": \"custom\", \"order\": \"desc\", \"field\": \"windows.service.start_type\", \"customLabel\": \"Startup Type\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"4\"}], \"params\": {\"perPage\": 10, \"showPartialRows\": false, \"showMeticsAtAllLevels\": false, \"showTotal\": false, \"totalFunc\": \"sum\", \"sort\": {\"direction\": null, \"columnIndex\": null}}, \"title\": \"Service States [Metricbeat Windows] ECS\", \"type\": \"table\"}"
+            },
+            "id": "eb8277d0-c98c-11e7-9835-2f31fe08873b-ecs",
+            "type": "visualization",
+            "version": 1
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": []}"
+                },
+                "savedSearchId": "b6b7ccc0-c98d-11e7-9835-2f31fe08873b-ecs",
+                "title": "Hosts [Metricbeat Windows] ECS",
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"field\": \"windows.service.id\", \"customLabel\": \"Total Services\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"cardinality\", \"id\": \"1\"}, {\"params\": {\"size\": 100, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"host.name\", \"customLabel\": \"Host\"}, \"schema\": \"bucket\", \"enabled\": true, \"type\": \"terms\", \"id\": \"2\"}], \"params\": {\"perPage\": 10, \"showPartialRows\": false, \"showMeticsAtAllLevels\": false, \"showTotal\": false, \"totalFunc\": \"sum\", \"sort\": {\"direction\": null, \"columnIndex\": null}}, \"title\": \"Hosts [Metricbeat Windows] ECS\", \"type\": \"table\"}"
+            },
+            "id": "23a5fff0-c98e-11e7-9835-2f31fe08873b-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": []}"
+                },
+                "savedSearchId": "b6b7ccc0-c98d-11e7-9835-2f31fe08873b-ecs",
+                "title": "Startup States [Metricbeat Windows] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"field\": \"windows.service.id\", \"customLabel\": \"Service Count\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"cardinality\", \"id\": \"1\"}, {\"params\": {\"size\": 5, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"windows.service.start_type\", \"customLabel\": \"Startup Type\"}, \"schema\": \"segment\", \"enabled\": true, \"type\": \"terms\", \"id\": \"4\"}, {\"params\": {\"size\": 5, \"orderBy\": \"1\", \"order\": \"desc\", \"field\": \"windows.service.state\", \"customLabel\": \"State\"}, \"schema\": \"segment\", \"enabled\": true, \"type\": \"terms\", \"id\": \"3\"}], \"params\": {\"addTooltip\": true, \"isDonut\": true, \"type\": \"pie\", \"legendPosition\": \"right\", \"addLegend\": true}, \"title\": \"Startup States [Metricbeat Windows] ECS\", \"type\": \"pie\"}"
+            },
+            "id": "830c45f0-c991-11e7-9835-2f31fe08873b-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": []}"
+                },
+                "savedSearchId": "b6b7ccc0-c98d-11e7-9835-2f31fe08873b-ecs",
+                "title": "Unique Services [Metricbeat Windows] ECS",
+                "uiStateJSON": "{\"vis\": {\"defaultColors\": {\"0 - 100\": \"rgb(0,104,55)\"}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"field\": \"windows.service.id\", \"customLabel\": \"Services\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"cardinality\", \"id\": \"1\"}], \"params\": {\"addTooltip\": true, \"gauge\": {\"autoExtend\": false, \"orientation\": \"vertical\", \"gaugeColorMode\": \"None\", \"useRange\": false, \"gaugeType\": \"Metric\", \"scale\": {\"show\": false, \"labels\": false, \"color\": \"#333\", \"width\": 2}, \"backStyle\": \"Full\", \"colorSchema\": \"Green to Red\", \"gaugeStyle\": \"Full\", \"percentageMode\": false, \"style\": {\"labelColor\": false, \"fontSize\": 60, \"bgColor\": false, \"subText\": \"\"}, \"type\": \"simple\", \"colorsRange\": [{\"to\": 100, \"from\": 0}], \"verticalSplit\": false, \"labels\": {\"show\": false, \"color\": \"black\"}, \"invertColors\": false}, \"type\": \"gauge\", \"addLegend\": false}, \"title\": \"Unique Services [Metricbeat Windows] ECS\", \"type\": \"metric\"}"
+            },
+            "id": "35f5ad60-c996-11e7-9835-2f31fe08873b-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [{\"exists\": {\"field\": \"windows.service.exit_code\"}, \"meta\": {\"value\": \"exists\", \"key\": \"windows.service.exit_code\", \"negate\": false, \"type\": \"exists\", \"alias\": null, \"disabled\": false, \"index\": \"metricbeat-*\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"windows.service.exit_code\": {\"query\": \"0\", \"type\": \"phrase\"}}}, \"meta\": {\"value\": \"0\", \"key\": \"windows.service.exit_code\", \"negate\": true, \"params\": {\"query\": \"0\", \"type\": \"phrase\"}, \"type\": \"phrase\", \"alias\": null, \"disabled\": false, \"index\": \"metricbeat-*\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"windows.service.exit_code\": {\"query\": \"ERROR_SERVICE_NEVER_STARTED\", \"type\": \"phrase\"}}}, \"meta\": {\"value\": \"ERROR_SERVICE_NEVER_STARTED\", \"key\": \"windows.service.exit_code\", \"negate\": true, \"params\": {\"query\": \"ERROR_SERVICE_NEVER_STARTED\", \"type\": \"phrase\"}, \"type\": \"phrase\", \"alias\": null, \"disabled\": false, \"index\": \"metricbeat-*\"}, \"$state\": {\"store\": \"appState\"}}]}"
+                },
+                "savedSearchId": "b6b7ccc0-c98d-11e7-9835-2f31fe08873b-ecs",
+                "title": "Non-zero Service Exit Codes [Metricbeat Windows] ECS",
+                "uiStateJSON": "{\"vis\": {\"defaultColors\": {\"0 - 100\": \"rgb(0,104,55)\"}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"params\": {\"field\": \"windows.service.id\", \"customLabel\": \"Non-zero Exit Codes\"}, \"schema\": \"metric\", \"enabled\": true, \"type\": \"cardinality\", \"id\": \"1\"}], \"params\": {\"addTooltip\": true, \"gauge\": {\"autoExtend\": false, \"orientation\": \"vertical\", \"gaugeColorMode\": \"None\", \"useRange\": false, \"gaugeType\": \"Metric\", \"scale\": {\"show\": false, \"labels\": false, \"color\": \"#333\", \"width\": 2}, \"backStyle\": \"Full\", \"colorSchema\": \"Green to Red\", \"gaugeStyle\": \"Full\", \"percentageMode\": false, \"style\": {\"labelColor\": false, \"fontSize\": 60, \"bgColor\": false, \"subText\": \"\"}, \"type\": \"simple\", \"colorsRange\": [{\"to\": 100, \"from\": 0}], \"verticalSplit\": false, \"labels\": {\"show\": false, \"color\": \"black\"}, \"invertColors\": false}, \"type\": \"gauge\", \"addLegend\": false}, \"title\": \"Non-zero Service Exit Codes [Metricbeat Windows] ECS\", \"type\": \"metric\"}"
+            },
+            "id": "c36b2ba0-ca29-11e7-9835-2f31fe08873b-ecs",
+            "type": "visualization",
+            "version": 1
+        },
+        {
+            "attributes": {
+                "columns": [
+                    "host.name",
+                    "windows.service.display_name",
+                    "windows.service.state",
+                    "windows.service.start_type",
+                    "windows.service.uptime.ms",
+                    "windows.service.pid",
+                    "windows.service.exit_code"
+                ],
+                "description": "",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [{\"query\": {\"match\": {\"event.module\": {\"query\": \"windows\", \"type\": \"phrase\"}}}, \"meta\": {\"value\": \"windows\", \"key\": \"event.module\", \"negate\": false, \"params\": {\"query\": \"windows\", \"type\": \"phrase\"}, \"type\": \"phrase\", \"alias\": null, \"disabled\": false, \"index\": \"metricbeat-*\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"metricset.name\": {\"query\": \"service\", \"type\": \"phrase\"}}}, \"meta\": {\"value\": \"service\", \"key\": \"metricset.name\", \"negate\": false, \"params\": {\"query\": \"service\", \"type\": \"phrase\"}, \"type\": \"phrase\", \"alias\": null, \"disabled\": false, \"index\": \"metricbeat-*\"}, \"$state\": {\"store\": \"appState\"}}], \"index\": \"metricbeat-*\", \"highlightAll\": true, \"version\": true}"
+                },
+                "sort": [
+                    "@timestamp",
+                    "desc"
+                ],
+                "title": "Services [Metricbeat Windows] ECS",
+                "version": 1
+            },
+            "id": "b6b7ccc0-c98d-11e7-9835-2f31fe08873b-ecs",
+            "type": "search",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "Overview of the Windows Service States",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": [], \"version\": true, \"highlightAll\": true}"
+                },
+                "optionsJSON": "{\"darkTheme\": false}",
+                "panelsJSON": "[{\"type\": \"visualization\", \"row\": 4, \"size_y\": 5, \"id\": \"eb8277d0-c98c-11e7-9835-2f31fe08873b-ecs\", \"col\": 4, \"panelIndex\": 1, \"size_x\": 9}, {\"type\": \"visualization\", \"row\": 4, \"size_y\": 5, \"id\": \"23a5fff0-c98e-11e7-9835-2f31fe08873b-ecs\", \"col\": 1, \"panelIndex\": 2, \"size_x\": 3}, {\"type\": \"visualization\", \"row\": 1, \"size_y\": 3, \"id\": \"830c45f0-c991-11e7-9835-2f31fe08873b-ecs\", \"col\": 1, \"panelIndex\": 3, \"size_x\": 4}, {\"type\": \"visualization\", \"row\": 1, \"size_y\": 3, \"id\": \"35f5ad60-c996-11e7-9835-2f31fe08873b-ecs\", \"col\": 5, \"panelIndex\": 4, \"size_x\": 4}, {\"type\": \"visualization\", \"row\": 1, \"size_y\": 3, \"id\": \"c36b2ba0-ca29-11e7-9835-2f31fe08873b-ecs\", \"col\": 9, \"panelIndex\": 5, \"size_x\": 4}]",
+                "timeRestore": false,
+                "title": "[Metricbeat Windows] Services ECS",
+                "uiStateJSON": "{\"P-1\": {\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}, \"P-4\": {\"vis\": {\"defaultColors\": {\"0 - 100\": \"rgb(0,104,55)\"}}}, \"P-2\": {\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}, \"P-5\": {\"vis\": {\"defaultColors\": {\"0 - 100\": \"rgb(0,104,55)\"}}}}",
+                "version": 1
+            },
+            "id": "d9eba730-c991-11e7-9835-2f31fe08873b-ecs",
+            "type": "dashboard",
+            "version": 6
+        }
+    ],
+    "version": "6.0.0"
+}
