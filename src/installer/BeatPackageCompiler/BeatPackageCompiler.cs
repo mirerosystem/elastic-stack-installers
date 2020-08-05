@@ -44,10 +44,12 @@ namespace Elastic.PackageCompiler.Beats
 
 
             // renmae exe file
-            if (System.IO.File.Exists(outExeFullPath))
-                System.IO.File.Delete(outExeFullPath);
             if (System.IO.File.Exists(exeFullPath))
+            {
+                if (System.IO.File.Exists(outExeFullPath))
+                    System.IO.File.Delete(outExeFullPath);
                 System.IO.File.Move(exeFullPath, outExeFullPath);
+            }
 
             // Generate UUID v5 from product properties.
             // This UUID *must* be stable and unique between Beats.
