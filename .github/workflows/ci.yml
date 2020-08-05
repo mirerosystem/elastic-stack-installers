@@ -27,6 +27,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: release 폴더 생성
       run: |
+        echo $PWD/relases/
         mkdir release
     - name: 버전 추가
       run: |
