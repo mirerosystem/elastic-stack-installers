@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
 env:
-  BEAT_VERSION: 7.7
+  BEAT_VERSION: 7.8
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
