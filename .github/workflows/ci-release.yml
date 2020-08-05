@@ -33,7 +33,7 @@ jobs:
         GITHUB_VERSION: ${{ steps.get_version.outputs.version }}
     - name: Copy MSI
       run: |
-        Copy-Item "./bin/out/*/*.msi"  -Destination "./release"
+        Copy-Item "./bin/out/*/*.msi"  -Destination "./release/"
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1.0.2
       env:

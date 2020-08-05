@@ -36,7 +36,7 @@ jobs:
         ./build build --cid $env:BEAT_VERSION --bitness x86 filebeat-oss metricbeat-oss winlogbeat-oss heartbeat-oss packetbeat-oss
     - name: copy MSI
       run: |
-        Copy-Item "./bin/out/**/*.msi"  -Destination "./release"
+        Copy-Item "./bin/out/**/*.msi"  -Destination "./release/"
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
