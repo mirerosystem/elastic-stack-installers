@@ -44,6 +44,8 @@ namespace Elastic.PackageCompiler.Beats
 
 
             // renmae exe file
+            if (System.IO.File.Exists(outExeFullPath))
+                System.IO.File.Delete(outExeFullPath);
             if (System.IO.File.Exists(exeFullPath))
                 System.IO.File.Move(exeFullPath, outExeFullPath);
 

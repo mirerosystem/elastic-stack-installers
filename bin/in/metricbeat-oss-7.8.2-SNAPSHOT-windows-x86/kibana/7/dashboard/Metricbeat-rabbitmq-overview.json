@@ -1,0 +1,105 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": []}"
+                },
+                "savedSearchId": "Metricbeat-Rabbitmq-ecs",
+                "title": "Memory Usage [Metricbeat RabbitMQ] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"RabbitMQ Memory Usage ECS\", \"aggs\": [{\"type\": \"max\", \"schema\": \"metric\", \"enabled\": true, \"params\": {\"field\": \"rabbitmq.node.mem.used.bytes\", \"json\": \"\", \"customLabel\": \"Used memory\"}, \"id\": \"1\"}, {\"type\": \"date_histogram\", \"schema\": \"segment\", \"enabled\": true, \"params\": {\"extended_bounds\": {}, \"min_doc_count\": 1, \"field\": \"@timestamp\", \"interval\": \"custom\", \"customInterval\": \"30s\"}, \"id\": \"3\"}, {\"type\": \"terms\", \"schema\": \"group\", \"enabled\": true, \"params\": {\"orderBy\": \"1\", \"size\": 5, \"field\": \"rabbitmq.node.name\", \"order\": \"desc\", \"customLabel\": \"Node name\"}, \"id\": \"4\"}], \"listeners\": {}, \"params\": {\"times\": [], \"setYExtents\": false, \"addLegend\": true, \"shareYAxis\": true, \"interpolate\": \"linear\", \"radiusRatio\": 9, \"showCircles\": false, \"yAxis\": {}, \"addTooltip\": true, \"defaultYExtents\": true, \"drawLinesBetweenPoints\": true, \"smoothLines\": true, \"legendPosition\": \"top\", \"scale\": \"linear\", \"addTimeMarker\": false}, \"type\": \"line\"}"
+            },
+            "id": "RabbitMQ-Memory-Usage-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": []}"
+                },
+                "savedSearchId": "Metricbeat-Rabbitmq-ecs",
+                "title": "Number of Nodes [Metricbeat RabbitMQ] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"Rabbitmq Number of Nodes ECS\", \"aggs\": [{\"type\": \"cardinality\", \"schema\": \"metric\", \"enabled\": true, \"params\": {\"field\": \"rabbitmq.node.name\", \"customLabel\": \"RabbitMQ Nodes\"}, \"id\": \"1\"}], \"listeners\": {}, \"params\": {\"handleNoResults\": true, \"fontSize\": 60}, \"type\": \"metric\"}"
+            },
+            "id": "Rabbitmq-Number-of-Nodes-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": []}"
+                },
+                "savedSearchId": "Metricbeat-Rabbitmq-ecs",
+                "title": "Erlang Process Usage [Metricbeat RabbitMQ] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"RabbitMQ Erlang Process Usage ECS\", \"aggs\": [{\"type\": \"max\", \"schema\": \"metric\", \"enabled\": true, \"params\": {\"field\": \"rabbitmq.node.proc.used\", \"customLabel\": \"Used Process\"}, \"id\": \"1\"}, {\"type\": \"date_histogram\", \"schema\": \"segment\", \"enabled\": true, \"params\": {\"extended_bounds\": {}, \"min_doc_count\": 1, \"field\": \"@timestamp\", \"interval\": \"custom\", \"customInterval\": \"30s\"}, \"id\": \"3\"}, {\"type\": \"terms\", \"schema\": \"group\", \"enabled\": true, \"params\": {\"orderBy\": \"1\", \"size\": 5, \"field\": \"rabbitmq.node.name\", \"order\": \"desc\", \"customLabel\": \"Node name\"}, \"id\": \"4\"}], \"listeners\": {}, \"params\": {\"times\": [], \"setYExtents\": false, \"addLegend\": true, \"shareYAxis\": true, \"interpolate\": \"linear\", \"radiusRatio\": 9, \"showCircles\": false, \"yAxis\": {}, \"addTooltip\": true, \"defaultYExtents\": false, \"drawLinesBetweenPoints\": true, \"smoothLines\": true, \"legendPosition\": \"top\", \"scale\": \"linear\", \"addTimeMarker\": false}, \"type\": \"line\"}"
+            },
+            "id": "RabbitMQ-Erlang-Process-Usage-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": []}"
+                },
+                "savedSearchId": "Metricbeat-Rabbitmq-ecs",
+                "title": "Queue Index Operations [Metricbeat RabbitMQ] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"Queue Index Operations [Metricbeat RabbitMQ] ECS\", \"aggs\": [{\"type\": \"max\", \"schema\": \"metric\", \"enabled\": true, \"params\": {\"field\": \"rabbitmq.node.queue.index.read.count\", \"customLabel\": \"Queue Index Read\"}, \"id\": \"1\"}, {\"type\": \"date_histogram\", \"schema\": \"segment\", \"enabled\": true, \"params\": {\"extended_bounds\": {}, \"min_doc_count\": 1, \"field\": \"@timestamp\", \"interval\": \"custom\", \"customInterval\": \"30s\"}, \"id\": \"2\"}, {\"type\": \"max\", \"schema\": \"metric\", \"enabled\": true, \"params\": {\"field\": \"rabbitmq.node.queue.index.journal_write.count\", \"customLabel\": \"Queue Index Jornal Write\"}, \"id\": \"3\"}, {\"type\": \"max\", \"schema\": \"metric\", \"enabled\": true, \"params\": {\"field\": \"rabbitmq.node.queue.index.write.count\", \"customLabel\": \"Queue Index Write\"}, \"id\": \"4\"}], \"params\": {\"categoryAxes\": [{\"position\": \"bottom\", \"style\": {}, \"type\": \"category\", \"title\": {}, \"labels\": {\"truncate\": 100, \"show\": true}, \"scale\": {\"type\": \"linear\"}, \"id\": \"CategoryAxis-1\", \"show\": true}], \"shareYAxis\": true, \"times\": [], \"setYExtents\": false, \"grid\": {\"categoryLines\": false, \"style\": {\"color\": \"#eee\"}}, \"addTimeMarker\": false, \"seriesParams\": [{\"valueAxis\": \"ValueAxis-1\", \"type\": \"line\", \"mode\": \"normal\", \"drawLinesBetweenPoints\": true, \"data\": {\"id\": \"1\", \"label\": \"Count\"}, \"show\": \"true\", \"showCircles\": true}], \"interpolate\": \"linear\", \"addTooltip\": true, \"showCircles\": false, \"yAxis\": {}, \"radiusRatio\": 9, \"valueAxes\": [{\"position\": \"left\", \"style\": {}, \"type\": \"value\", \"title\": {\"text\": \"Count\"}, \"labels\": {\"filter\": false, \"show\": true, \"truncate\": 100, \"rotate\": 0}, \"scale\": {\"mode\": \"normal\", \"type\": \"linear\"}, \"id\": \"ValueAxis-1\", \"show\": true, \"name\": \"LeftAxis-1\"}], \"defaultYExtents\": false, \"drawLinesBetweenPoints\": true, \"type\": \"line\", \"smoothLines\": false, \"legendPosition\": \"top\", \"scale\": \"linear\", \"addLegend\": true}, \"type\": \"line\"}"
+            },
+            "id": "RabbitMQ-Queue-Index-Operations-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"index\": \"metricbeat-*\", \"highlight\": {\"fragment_size\": 2147483647, \"post_tags\": [\"@/kibana-highlighted-field@\"], \"fields\": {\"*\": {}}, \"require_field_match\": false, \"pre_tags\": [\"@kibana-highlighted-field@\"]}, \"query\": {\"language\": \"kuery\", \"query\": \"event.module:rabbitmq\"}}"
+                },
+                "sort": [
+                    "@timestamp",
+                    "desc"
+                ],
+                "title": "Metricbeat Rabbitmq ECS",
+                "version": 1
+            },
+            "id": "Metricbeat-Rabbitmq-ecs",
+            "type": "search",
+            "version": 1
+        },
+        {
+            "attributes": {
+                "description": "Overview of RabbitMQ status",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"version\": true, \"highlightAll\": true, \"query\": {\"language\": \"kuery\", \"query\": \"\"}}"
+                },
+                "optionsJSON": "{\"darkTheme\": false}",
+                "panelsJSON": "[{\"row\": 1, \"col\": 1, \"type\": \"visualization\", \"panelIndex\": 8, \"size_y\": 3, \"id\": \"RabbitMQ-Memory-Usage-ecs\", \"size_x\": 6}, {\"row\": 1, \"col\": 8, \"type\": \"visualization\", \"panelIndex\": 2, \"size_y\": 3, \"id\": \"Rabbitmq-Number-of-Nodes-ecs\", \"size_x\": 3}, {\"row\": 4, \"col\": 1, \"type\": \"visualization\", \"panelIndex\": 10, \"size_y\": 3, \"id\": \"RabbitMQ-Erlang-Process-Usage-ecs\", \"size_x\": 6}, {\"row\": 4, \"col\": 7, \"type\": \"visualization\", \"panelIndex\": 9, \"size_y\": 3, \"id\": \"RabbitMQ-Queue-Index-Operations-ecs\", \"size_x\": 6}]",
+                "timeRestore": false,
+                "title": "[Metricbeat RabbitMQ] Overview ECS",
+                "uiStateJSON": "{\"P-2\": {\"vis\": {\"defaultColors\": {\"0 - 100\": \"rgb(0,104,55)\"}}}}",
+                "version": 1
+            },
+            "id": "AV4YobKIge1VCbKU_qVo-ecs",
+            "type": "dashboard",
+            "version": 2
+        }
+    ],
+    "version": "6.0.0-beta1-SNAPSHOT"
+}

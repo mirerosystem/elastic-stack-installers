@@ -1,0 +1,78 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": []}"
+                },
+                "savedSearchId": "ffaf5a30-2413-11e7-a0d9-39604d45ca7f-ecs",
+                "title": "Mainlog Severity [Filebeat Icinga] ECS",
+                "uiStateJSON": "{\"vis\": {\"colors\": {\"warning\": \"#E5AC0E\", \"critical\": \"#BF1B00\"}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"schema\": \"metric\", \"params\": {}, \"id\": \"1\", \"type\": \"count\", \"enabled\": true}, {\"schema\": \"segment\", \"params\": {\"field\": \"@timestamp\", \"interval\": \"auto\", \"min_doc_count\": 1, \"extended_bounds\": {}, \"customInterval\": \"2h\"}, \"id\": \"2\", \"type\": \"date_histogram\", \"enabled\": true}, {\"schema\": \"group\", \"params\": {\"field\": \"log.level\", \"order\": \"desc\", \"orderBy\": \"1\", \"size\": 5}, \"id\": \"3\", \"type\": \"terms\", \"enabled\": true}], \"listeners\": {}, \"params\": {\"addLegend\": true, \"mode\": \"stacked\", \"times\": [], \"addTimeMarker\": false, \"addTooltip\": true, \"scale\": \"linear\", \"setYExtents\": false, \"defaultYExtents\": false, \"legendPosition\": \"right\"}, \"type\": \"histogram\", \"title\": \"Icinga Mainlog Severity ECS\"}"
+            },
+            "id": "d8e5dc40-2417-11e7-a83b-d5f4cebac9ff-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "columns": [
+                    "icinga.main.facility",
+                    "log.level",
+                    "message"
+                ],
+                "description": "",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\": \"filebeat-*\", \"query\": {\"language\": \"kuery\", \"query\": \"\"}, \"filter\": [{\"query\": {\"match\": {\"event.module\": {\"query\": \"icinga\", \"type\": \"phrase\"}}}, \"meta\": {\"alias\": null, \"disabled\": false, \"key\": \"event.module\", \"params\": {\"query\": \"icinga\", \"type\": \"phrase\"}, \"index\": \"filebeat-*\", \"type\": \"phrase\", \"negate\": false, \"value\": \"icinga\"}, \"$state\": {\"store\": \"appState\"}}, {\"query\": {\"match\": {\"fileset.name\": {\"query\": \"main\", \"type\": \"phrase\"}}}, \"meta\": {\"alias\": null, \"disabled\": false, \"key\": \"fileset.name\", \"params\": {\"query\": \"main\", \"type\": \"phrase\"}, \"index\": \"filebeat-*\", \"type\": \"phrase\", \"negate\": false, \"value\": \"main\"}, \"$state\": {\"store\": \"appState\"}}], \"version\": true, \"highlightAll\": true}"
+                },
+                "sort": [
+                    "@timestamp",
+                    "desc"
+                ],
+                "title": "Main Log [Filebeat Icinga] ECS",
+                "version": 1
+            },
+            "id": "ffaf5a30-2413-11e7-a0d9-39604d45ca7f-ecs",
+            "type": "search",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": []}"
+                },
+                "savedSearchId": "ffaf5a30-2413-11e7-a0d9-39604d45ca7f-ecs",
+                "title": "Mainlog Facility [Filebeat Icinga] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"schema\": \"metric\", \"params\": {}, \"id\": \"1\", \"type\": \"count\", \"enabled\": true}, {\"schema\": \"segment\", \"params\": {\"field\": \"@timestamp\", \"interval\": \"auto\", \"min_doc_count\": 1, \"extended_bounds\": {}, \"customInterval\": \"2h\"}, \"id\": \"2\", \"type\": \"date_histogram\", \"enabled\": true}, {\"schema\": \"group\", \"params\": {\"field\": \"icinga.main.facility\", \"order\": \"desc\", \"orderBy\": \"1\", \"size\": 5}, \"id\": \"3\", \"type\": \"terms\", \"enabled\": true}], \"listeners\": {}, \"params\": {\"addLegend\": true, \"mode\": \"stacked\", \"times\": [], \"addTimeMarker\": false, \"addTooltip\": true, \"scale\": \"linear\", \"setYExtents\": false, \"defaultYExtents\": false, \"legendPosition\": \"right\"}, \"type\": \"histogram\", \"title\": \"Icinga Mainlog Facility ECS\"}"
+            },
+            "id": "2cf77780-2418-11e7-a83b-d5f4cebac9ff-ecs",
+            "type": "visualization",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "Filebeat Icinga module dashboard for the main log files",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"language\": \"kuery\", \"query\": \"\"}, \"filter\": [], \"version\": true, \"highlightAll\": true}"
+                },
+                "optionsJSON": "{\"darkTheme\": false}",
+                "panelsJSON": "[{\"size_y\": 3, \"panelIndex\": 1, \"row\": 1, \"type\": \"visualization\", \"col\": 7, \"size_x\": 6, \"id\": \"d8e5dc40-2417-11e7-a83b-d5f4cebac9ff-ecs\"}, {\"size_y\": 25, \"panelIndex\": 2, \"row\": 4, \"type\": \"search\", \"col\": 1, \"size_x\": 12, \"id\": \"ffaf5a30-2413-11e7-a0d9-39604d45ca7f-ecs\", \"columns\": [\"icinga.main.facility\", \"log.level\", \"message\"], \"sort\": [\"@timestamp\", \"desc\"]}, {\"size_y\": 3, \"panelIndex\": 3, \"row\": 1, \"type\": \"visualization\", \"col\": 1, \"size_x\": 6, \"id\": \"2cf77780-2418-11e7-a83b-d5f4cebac9ff-ecs\"}]",
+                "timeRestore": false,
+                "title": "[Filebeat Icinga] Main Log ECS",
+                "uiStateJSON": "{}",
+                "version": 1
+            },
+            "id": "f693d260-2417-11e7-a83b-d5f4cebac9ff-ecs",
+            "type": "dashboard",
+            "version": 4
+        }
+    ],
+    "version": "6.0.0-beta1-SNAPSHOT"
+}

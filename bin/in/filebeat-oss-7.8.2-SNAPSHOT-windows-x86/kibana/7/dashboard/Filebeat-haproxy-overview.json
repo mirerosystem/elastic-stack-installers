@@ -1,0 +1,87 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\": \"filebeat-*\", \"query\": {\"language\": \"kuery\", \"query\": \"\"}, \"filter\": []}"
+                },
+                "title": "Backend breakdown [Filebeat HAProxy] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"schema\": \"metric\", \"params\": {}, \"id\": \"1\", \"type\": \"count\", \"enabled\": true}, {\"schema\": \"segment\", \"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"otherBucket\": false, \"field\": \"haproxy.backend_name\", \"missingBucketLabel\": \"Missing\", \"otherBucketLabel\": \"Other\", \"size\": 5, \"order\": \"desc\"}, \"id\": \"2\", \"type\": \"terms\", \"enabled\": true}], \"params\": {\"addLegend\": true, \"labels\": {\"last_level\": true, \"truncate\": 100, \"show\": false, \"values\": true}, \"isDonut\": true, \"type\": \"pie\", \"legendPosition\": \"right\", \"addTooltip\": true}, \"type\": \"pie\", \"title\": \"Backend breakdown [Filebeat HAProxy] ECS\"}"
+            },
+            "id": "55251360-aa32-11e8-9c06-877f0445e3e0-ecs",
+            "type": "visualization",
+            "updated_at": "2018-12-06T11:35:36.721Z",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\": \"filebeat-*\", \"query\": {\"language\": \"kuery\", \"query\": \"\"}, \"filter\": []}"
+                },
+                "title": "Frontend breakdown [Filebeat HAProxy] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"schema\": \"metric\", \"params\": {}, \"id\": \"1\", \"type\": \"count\", \"enabled\": true}, {\"schema\": \"segment\", \"params\": {\"orderBy\": \"1\", \"missingBucket\": false, \"otherBucket\": false, \"field\": \"haproxy.frontend_name\", \"missingBucketLabel\": \"Missing\", \"otherBucketLabel\": \"Other\", \"size\": 5, \"order\": \"desc\"}, \"id\": \"2\", \"type\": \"terms\", \"enabled\": true}], \"params\": {\"addLegend\": true, \"labels\": {\"last_level\": true, \"truncate\": 100, \"show\": false, \"values\": true}, \"isDonut\": true, \"type\": \"pie\", \"legendPosition\": \"right\", \"addTooltip\": true}, \"type\": \"pie\", \"title\": \"Frontend breakdown [Filebeat HAProxy] ECS\"}"
+            },
+            "id": "7fb671f0-aa32-11e8-9c06-877f0445e3e0-ecs",
+            "type": "visualization",
+            "updated_at": "2018-12-06T11:35:36.721Z",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\": \"filebeat-*\", \"query\": {\"language\": \"kuery\", \"query\": \"\"}, \"filter\": []}"
+                },
+                "title": "IP Geohashes [Filebeat HAProxy] ECS",
+                "uiStateJSON": "{\"mapCenter\": [14.944784875088372, 5.09765625]}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"schema\": \"metric\", \"params\": {\"field\": \"source.address\"}, \"id\": \"1\", \"type\": \"cardinality\", \"enabled\": true}, {\"schema\": \"segment\", \"params\": {\"field\": \"source.geo.location\", \"isFilteredByCollar\": true, \"autoPrecision\": true, \"useGeocentroid\": true, \"precision\": 2}, \"id\": \"2\", \"type\": \"geohash_grid\", \"enabled\": true}], \"params\": {\"wms\": {\"url\": \"https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WMSServer\", \"options\": {\"layers\": \"0\", \"attribution\": \"Maps provided by USGS\", \"styles\": \"\", \"transparent\": true, \"version\": \"1.3.0\", \"format\": \"image/png\"}, \"enabled\": false}, \"heatMinOpacity\": 0.1, \"mapType\": \"Scaled Circle Markers\", \"heatRadius\": 25, \"isDesaturated\": true, \"addTooltip\": true, \"heatBlur\": 15, \"heatMaxZoom\": 16, \"heatNormalizeData\": true, \"mapCenter\": [15, 5], \"legendPosition\": \"bottomright\", \"mapZoom\": 2}, \"type\": \"tile_map\", \"title\": \"IP Geohashes [Filebeat HAProxy] ECS\"}"
+            },
+            "id": "11f8b9c0-aa32-11e8-9c06-877f0445e3e0-ecs",
+            "type": "visualization",
+            "updated_at": "2018-12-06T11:35:36.721Z",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\": \"filebeat-*\", \"query\": {\"language\": \"kuery\", \"query\": \"\"}, \"filter\": []}"
+                },
+                "title": "Response codes over time [Filebeat HAProxy] ECS",
+                "uiStateJSON": "{\"vis\": {\"colors\": {\"404\": \"#EAB839\", \"503\": \"#705DA0\", \"200\": \"#508642\", \"204\": \"#629E51\", \"302\": \"#6ED0E0\"}}}",
+                "version": 1,
+                "visState": "{\"aggs\": [{\"schema\": \"metric\", \"params\": {}, \"id\": \"1\", \"type\": \"count\", \"enabled\": true}, {\"schema\": \"segment\", \"params\": {\"field\": \"@timestamp\", \"interval\": \"auto\", \"min_doc_count\": 1, \"extended_bounds\": {}, \"customInterval\": \"2h\"}, \"id\": \"2\", \"type\": \"date_histogram\", \"enabled\": true}, {\"schema\": \"group\", \"params\": {\"orderBy\": \"_term\", \"missingBucket\": false, \"otherBucket\": false, \"field\": \"http.response.status_code\", \"missingBucketLabel\": \"Missing\", \"otherBucketLabel\": \"Other\", \"size\": 5, \"order\": \"desc\"}, \"id\": \"3\", \"type\": \"terms\", \"enabled\": true}], \"params\": {\"addLegend\": true, \"times\": [], \"addTimeMarker\": false, \"addTooltip\": true, \"categoryAxes\": [{\"style\": {}, \"show\": true, \"position\": \"bottom\", \"labels\": {\"truncate\": 100, \"show\": true}, \"scale\": {\"type\": \"linear\"}, \"title\": {}, \"type\": \"category\", \"id\": \"CategoryAxis-1\"}], \"type\": \"histogram\", \"seriesParams\": [{\"mode\": \"stacked\", \"data\": {\"label\": \"Count\", \"id\": \"1\"}, \"show\": \"true\", \"valueAxis\": \"ValueAxis-1\", \"showCircles\": true, \"drawLinesBetweenPoints\": true, \"type\": \"histogram\"}], \"grid\": {\"style\": {\"color\": \"#eee\"}, \"categoryLines\": false}, \"valueAxes\": [{\"style\": {}, \"show\": true, \"position\": \"left\", \"labels\": {\"rotate\": 0, \"show\": true, \"filter\": false, \"truncate\": 100}, \"scale\": {\"mode\": \"normal\", \"type\": \"linear\"}, \"title\": {\"text\": \"Count\"}, \"name\": \"LeftAxis-1\", \"type\": \"value\", \"id\": \"ValueAxis-1\"}], \"legendPosition\": \"right\"}, \"type\": \"histogram\", \"title\": \"Response codes over time [Filebeat HAProxy] ECS\"}"
+            },
+            "id": "68af8ef0-aa33-11e8-9c06-877f0445e3e0-ecs",
+            "type": "visualization",
+            "updated_at": "2018-12-06T11:35:36.721Z",
+            "version": 2
+        },
+        {
+            "attributes": {
+                "description": "Filebeat HAProxy module dashboard",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"language\": \"kuery\", \"query\": \"\"}, \"filter\": []}"
+                },
+                "optionsJSON": "{\"useMargins\": true, \"hidePanelTitles\": false, \"darkTheme\": false}",
+                "panelsJSON": "[{\"panelIndex\": \"1\", \"embeddableConfig\": {}, \"type\": \"visualization\", \"version\": \"6.5.2\", \"id\": \"55251360-aa32-11e8-9c06-877f0445e3e0-ecs\", \"gridData\": {\"y\": 0, \"x\": 0, \"w\": 24, \"h\": 15, \"i\": \"1\"}}, {\"panelIndex\": \"2\", \"embeddableConfig\": {}, \"type\": \"visualization\", \"version\": \"6.5.2\", \"id\": \"7fb671f0-aa32-11e8-9c06-877f0445e3e0-ecs\", \"gridData\": {\"y\": 0, \"x\": 24, \"w\": 24, \"h\": 15, \"i\": \"2\"}}, {\"panelIndex\": \"3\", \"embeddableConfig\": {}, \"type\": \"visualization\", \"version\": \"6.5.2\", \"id\": \"11f8b9c0-aa32-11e8-9c06-877f0445e3e0-ecs\", \"gridData\": {\"y\": 15, \"x\": 0, \"w\": 24, \"h\": 15, \"i\": \"3\"}}, {\"panelIndex\": \"4\", \"embeddableConfig\": {}, \"type\": \"visualization\", \"version\": \"6.5.2\", \"id\": \"68af8ef0-aa33-11e8-9c06-877f0445e3e0-ecs\", \"gridData\": {\"y\": 15, \"x\": 24, \"w\": 24, \"h\": 15, \"i\": \"4\"}}]",
+                "timeRestore": false,
+                "title": "[Filebeat HAProxy] Overview ECS",
+                "version": 1
+            },
+            "id": "3560d580-aa34-11e8-9c06-877f0445e3e0-ecs",
+            "type": "dashboard",
+            "updated_at": "2018-12-06T11:40:40.204Z",
+            "version": 6
+        }
+    ],
+    "version": "6.5.2"
+}

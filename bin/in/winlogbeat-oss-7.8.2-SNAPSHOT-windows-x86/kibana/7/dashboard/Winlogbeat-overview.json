@@ -1,0 +1,183 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "Overview of all Windows Event Logs.",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"filter\": []}"
+                },
+                "optionsJSON": "{\"darkTheme\": false}",
+                "panelsJSON": "[{\"gridData\": {\"x\": 12, \"y\": 0, \"i\": \"1\", \"w\": 36, \"h\": 20}, \"panelRefName\": \"panel_0\", \"panelIndex\": \"1\", \"version\": \"7.0.0-SNAPSHOT\"}, {\"gridData\": {\"x\": 0, \"y\": 0, \"i\": \"3\", \"w\": 12, \"h\": 20}, \"panelRefName\": \"panel_1\", \"panelIndex\": \"3\", \"version\": \"7.0.0-SNAPSHOT\"}, {\"gridData\": {\"x\": 16, \"y\": 20, \"i\": \"4\", \"w\": 16, \"h\": 20}, \"panelRefName\": \"panel_2\", \"panelIndex\": \"4\", \"version\": \"7.0.0-SNAPSHOT\", \"embeddableConfig\": {\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}}, {\"gridData\": {\"x\": 32, \"y\": 20, \"i\": \"5\", \"w\": 16, \"h\": 20}, \"panelRefName\": \"panel_3\", \"panelIndex\": \"5\", \"version\": \"7.0.0-SNAPSHOT\"}, {\"gridData\": {\"x\": 0, \"y\": 20, \"i\": \"6\", \"w\": 16, \"h\": 20}, \"panelRefName\": \"panel_4\", \"panelIndex\": \"6\", \"version\": \"7.0.0-SNAPSHOT\"}]",
+                "timeRestore": false,
+                "title": "[Winlogbeat] Overview",
+                "version": 1
+            },
+            "id": "Winlogbeat-Dashboard-ecs",
+            "migrationVersion": {
+                "dashboard": "7.0.0"
+            },
+            "references": [
+                {
+                    "id": "Number-of-Events-Over-Time-By-Event-Log-ecs",
+                    "name": "panel_0",
+                    "type": "visualization"
+                },
+                {
+                    "id": "Number-of-Events-ecs",
+                    "name": "panel_1",
+                    "type": "visualization"
+                },
+                {
+                    "id": "Top-Event-IDs-ecs",
+                    "name": "panel_2",
+                    "type": "visualization"
+                },
+                {
+                    "id": "Event-Levels-ecs",
+                    "name": "panel_3",
+                    "type": "visualization"
+                },
+                {
+                    "id": "Sources-ecs",
+                    "name": "panel_4",
+                    "type": "visualization"
+                }
+            ],
+            "type": "dashboard",
+            "updated_at": "2019-02-05T19:56:19.932Z",
+            "version": 7
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"indexRefName\": \"kibanaSavedObjectMeta.searchSourceJSON.index\", \"filter\": []}"
+                },
+                "title": "Number of Events Over Time By Channel [Winlogbeat Overview]",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"Number of Events Over Time By Channel [Winlogbeat Overview]\", \"aggs\": [{\"type\": \"count\", \"schema\": \"metric\", \"params\": {}, \"enabled\": true, \"id\": \"1\"}, {\"type\": \"date_histogram\", \"schema\": \"segment\", \"params\": {\"customInterval\": \"2h\", \"drop_partials\": false, \"time_zone\": \"America/Montreal\", \"timeRange\": {\"mode\": \"relative\", \"to\": \"now\", \"from\": \"now-15d\"}, \"extended_bounds\": {}, \"field\": \"@timestamp\", \"useNormalizedEsInterval\": true, \"interval\": \"auto\", \"min_doc_count\": 1}, \"enabled\": true, \"id\": \"2\"}, {\"type\": \"terms\", \"schema\": \"group\", \"params\": {\"missingBucket\": false, \"field\": \"winlog.channel\", \"otherBucket\": false, \"missingBucketLabel\": \"Missing\", \"customLabel\": \"Channel\", \"size\": 6, \"order\": \"desc\", \"orderBy\": \"1\", \"otherBucketLabel\": \"Other\"}, \"enabled\": true, \"id\": \"3\"}], \"params\": {\"shareYAxis\": true, \"times\": [], \"valueAxes\": [{\"title\": {\"text\": \"Count\"}, \"labels\": {\"rotate\": 0, \"truncate\": 100, \"filter\": false, \"show\": true}, \"show\": true, \"type\": \"value\", \"style\": {}, \"position\": \"left\", \"scale\": {\"mode\": \"normal\", \"type\": \"linear\", \"setYExtents\": false, \"defaultYExtents\": false}, \"id\": \"ValueAxis-1\", \"name\": \"LeftAxis-1\"}], \"grid\": {\"categoryLines\": false, \"style\": {\"color\": \"#eee\"}}, \"type\": \"histogram\", \"setYExtents\": false, \"legendPosition\": \"right\", \"seriesParams\": [{\"mode\": \"stacked\", \"type\": \"histogram\", \"show\": \"true\", \"valueAxis\": \"ValueAxis-1\", \"data\": {\"label\": \"Count\", \"id\": \"1\"}}], \"addLegend\": true, \"addTooltip\": true, \"yAxis\": {}, \"dimensions\": {\"x\": {\"format\": {\"params\": {\"pattern\": \"YYYY-MM-DD HH:mm\"}, \"id\": \"date\"}, \"aggType\": \"date_histogram\", \"params\": {\"format\": \"YYYY-MM-DD HH:mm\", \"bounds\": {\"min\": \"2019-01-21T04:30:25.961Z\", \"max\": \"2019-02-05T04:30:25.961Z\"}, \"interval\": 43200000, \"date\": true}, \"accessor\": 0}, \"y\": [{\"format\": {\"id\": \"number\"}, \"aggType\": \"count\", \"params\": {}, \"accessor\": 2}], \"series\": [{\"format\": {\"params\": {\"missingBucketLabel\": \"Missing\", \"otherBucketLabel\": \"Other\", \"id\": \"string\"}, \"id\": \"terms\"}, \"aggType\": \"terms\", \"params\": {}, \"accessor\": 1}]}, \"defaultYExtents\": false, \"addTimeMarker\": false, \"categoryAxes\": [{\"title\": {}, \"labels\": {\"truncate\": 100, \"show\": true}, \"style\": {}, \"type\": \"category\", \"position\": \"bottom\", \"scale\": {\"type\": \"linear\"}, \"id\": \"CategoryAxis-1\", \"show\": true}], \"mode\": \"stacked\", \"scale\": \"linear\"}, \"type\": \"histogram\"}"
+            },
+            "id": "Number-of-Events-Over-Time-By-Event-Log-ecs",
+            "migrationVersion": {
+                "visualization": "7.0.0"
+            },
+            "references": [
+                {
+                    "id": "winlogbeat-*",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "visualization",
+            "updated_at": "2019-02-05T19:56:19.932Z",
+            "version": 7
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"indexRefName\": \"kibanaSavedObjectMeta.searchSourceJSON.index\", \"filter\": []}"
+                },
+                "title": "Number of Events [Winlogbeat Overview]",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"type\": \"metric\", \"aggs\": [{\"type\": \"count\", \"params\": {}, \"schema\": \"metric\", \"id\": \"1\"}], \"params\": {\"fontSize\": 60}, \"listeners\": {}}"
+            },
+            "id": "Number-of-Events-ecs",
+            "migrationVersion": {
+                "visualization": "7.0.0"
+            },
+            "references": [
+                {
+                    "id": "winlogbeat-*",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "visualization",
+            "updated_at": "2019-02-05T19:56:19.932Z",
+            "version": 7
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"indexRefName\": \"kibanaSavedObjectMeta.searchSourceJSON.index\", \"filter\": []}"
+                },
+                "title": "Top Event IDs [Winlogbeat Overview]",
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}",
+                "version": 1,
+                "visState": "{\"title\": \"Top Event IDs [Winlogbeat Overview]\", \"aggs\": [{\"type\": \"count\", \"schema\": \"metric\", \"params\": {}, \"enabled\": true, \"id\": \"1\"}, {\"type\": \"terms\", \"schema\": \"bucket\", \"params\": {\"missingBucket\": false, \"field\": \"winlog.event_id\", \"otherBucket\": false, \"missingBucketLabel\": \"Missing\", \"customLabel\": \"Event IDs\", \"size\": 5, \"order\": \"desc\", \"orderBy\": \"1\", \"otherBucketLabel\": \"Other\"}, \"enabled\": true, \"id\": \"2\"}], \"params\": {\"showTotal\": false, \"totalFunc\": \"sum\", \"perPage\": 10, \"dimensions\": {\"buckets\": [{\"format\": {\"params\": {\"missingBucketLabel\": \"Missing\", \"otherBucketLabel\": \"Other\", \"id\": \"string\"}, \"id\": \"terms\"}, \"aggType\": \"terms\", \"params\": {}, \"accessor\": 0}], \"metrics\": [{\"format\": {\"id\": \"number\"}, \"aggType\": \"count\", \"params\": {}, \"accessor\": 1}]}, \"showMetricsAtAllLevels\": false, \"showPartialRows\": false, \"sort\": {\"direction\": null, \"columnIndex\": null}}, \"type\": \"table\"}"
+            },
+            "id": "Top-Event-IDs-ecs",
+            "migrationVersion": {
+                "visualization": "7.0.0"
+            },
+            "references": [
+                {
+                    "id": "winlogbeat-*",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "visualization",
+            "updated_at": "2019-02-05T19:56:19.932Z",
+            "version": 7
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"indexRefName\": \"kibanaSavedObjectMeta.searchSourceJSON.index\", \"filter\": []}"
+                },
+                "title": "Event Levels [Winlogbeat Overview]",
+                "uiStateJSON": "{\"vis\": {\"params\": {\"sort\": {\"direction\": null, \"columnIndex\": null}}}}",
+                "version": 1,
+                "visState": "{\"title\": \"Event Levels [Winlogbeat Overview]\", \"aggs\": [{\"type\": \"count\", \"schema\": \"metric\", \"params\": {}, \"enabled\": true, \"id\": \"1\"}, {\"type\": \"terms\", \"schema\": \"bucket\", \"params\": {\"missingBucket\": false, \"field\": \"log.level\", \"otherBucket\": false, \"missingBucketLabel\": \"Missing\", \"customLabel\": \"Log Levels\", \"size\": 5, \"order\": \"desc\", \"orderBy\": \"1\", \"otherBucketLabel\": \"Other\"}, \"enabled\": true, \"id\": \"2\"}], \"params\": {\"showTotal\": false, \"totalFunc\": \"sum\", \"perPage\": 10, \"dimensions\": {\"buckets\": [{\"format\": {\"params\": {\"missingBucketLabel\": \"Missing\", \"otherBucketLabel\": \"Other\", \"id\": \"string\"}, \"id\": \"terms\"}, \"aggType\": \"terms\", \"params\": {}, \"accessor\": 0}], \"metrics\": [{\"format\": {\"id\": \"number\"}, \"aggType\": \"count\", \"params\": {}, \"accessor\": 1}]}, \"showMetricsAtAllLevels\": false, \"showPartialRows\": false, \"sort\": {\"direction\": null, \"columnIndex\": null}}, \"type\": \"table\"}"
+            },
+            "id": "Event-Levels-ecs",
+            "migrationVersion": {
+                "visualization": "7.0.0"
+            },
+            "references": [
+                {
+                    "id": "winlogbeat-*",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "visualization",
+            "updated_at": "2019-02-05T19:56:19.932Z",
+            "version": 7
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"query\": {\"query\": \"\", \"language\": \"kuery\"}, \"indexRefName\": \"kibanaSavedObjectMeta.searchSourceJSON.index\", \"filter\": []}"
+                },
+                "title": "Sources (Provider Names) [Winlogbeat Overview]",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"Sources (Provider Names) [Winlogbeat Overview]\", \"aggs\": [{\"type\": \"count\", \"schema\": \"metric\", \"params\": {}, \"enabled\": true, \"id\": \"1\"}, {\"type\": \"terms\", \"schema\": \"segment\", \"params\": {\"missingBucket\": false, \"field\": \"winlog.provider_name\", \"otherBucket\": false, \"missingBucketLabel\": \"Missing\", \"otherBucketLabel\": \"Other\", \"size\": 7, \"order\": \"desc\", \"orderBy\": \"1\"}, \"enabled\": true, \"id\": \"2\"}], \"params\": {\"addLegend\": true, \"addTooltip\": true, \"shareYAxis\": true, \"labels\": {\"last_level\": true, \"values\": true, \"truncate\": 100, \"show\": false}, \"isDonut\": false, \"type\": \"pie\", \"legendPosition\": \"right\"}, \"type\": \"pie\"}"
+            },
+            "id": "Sources-ecs",
+            "migrationVersion": {
+                "visualization": "7.0.0"
+            },
+            "references": [
+                {
+                    "id": "winlogbeat-*",
+                    "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+                    "type": "index-pattern"
+                }
+            ],
+            "type": "visualization",
+            "updated_at": "2019-02-05T19:56:19.932Z",
+            "version": 7
+        }
+    ],
+    "version": "7.0.0-SNAPSHOT"
+}

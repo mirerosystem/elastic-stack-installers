@@ -1,0 +1,71 @@
+{
+    "objects": [
+        {
+            "attributes": {
+                "description": "Overview of Kubernetes API Server",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{}"
+                },
+                "title": "API Server Top clients by number of requests [Metricbeat Kubernetes] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"API Server Top clients by number of requests [Metricbeat Kubernetes] ECS\", \"aggs\": [], \"params\": {\"bar_color_rules\": [{\"id\": \"61a13010-5794-11e8-8bd0-2180975e72dd\"}], \"show_grid\": 1, \"interval\": \"5m\", \"type\": \"top_n\", \"axis_position\": \"left\", \"axis_formatter\": \"number\", \"show_legend\": 1, \"series\": [{\"stacked\": \"stacked\", \"terms_size\": \"10\", \"chart_type\": \"line\", \"formatter\": \"number\", \"seperate_axis\": 0, \"filter\": \"\", \"terms_field\": \"kubernetes.apiserver.request.client\", \"color\": \"rgba(104,188,0,1)\", \"point_size\": 1, \"metrics\": [{\"type\": \"max\", \"field\": \"kubernetes.apiserver.request.count\", \"id\": \"61ca57f2-469d-11e7-af02-69e470af7417\"}, {\"type\": \"derivative\", \"unit\": \"\", \"field\": \"61ca57f2-469d-11e7-af02-69e470af7417\", \"id\": \"0e6ff4a0-5792-11e8-8bd0-2180975e72dd\"}], \"split_mode\": \"terms\", \"axis_position\": \"right\", \"line_width\": 1, \"fill\": 0.5, \"split_filters\": [{\"color\": \"#68BC00\", \"id\": \"9e4b8030-5792-11e8-8bd0-2180975e72dd\"}], \"terms_order_by\": \"61ca57f2-469d-11e7-af02-69e470af7417\", \"id\": \"61ca57f1-469d-11e7-af02-69e470af7417\", \"label\": \"Top clients by number of requests (5m)\"}], \"time_field\": \"@timestamp\", \"id\": \"61ca57f0-469d-11e7-af02-69e470af7417\", \"index_pattern\": \"metricbeat-*\"}, \"type\": \"metrics\"}"
+            },
+            "id": "7cbeb750-5794-11e8-afa2-e9067ea62228-ecs",
+            "type": "visualization",
+            "updated_at": "2018-05-14T18:23:10.501Z",
+            "version": 5
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{}"
+                },
+                "title": "API Server Requests [Metricbeat Kubernetes] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"API Server Requests [Metricbeat Kubernetes] ECS\", \"aggs\": [], \"params\": {\"type\": \"timeseries\", \"show_grid\": 1, \"interval\": \"auto\", \"axis_position\": \"left\", \"axis_formatter\": \"number\", \"show_legend\": 1, \"series\": [{\"stacked\": \"none\", \"chart_type\": \"line\", \"formatter\": \"us,ms,2\", \"seperate_axis\": 0, \"filter\": \"NOT (kubernetes.apiserver.request.verb: WATCH or kubernetes.apiserver.request.verb: CONNECT)\", \"value_template\": \"{{value}} ms\", \"color\": \"rgba(159,5,0,1)\", \"point_size\": 1, \"metrics\": [{\"type\": \"sum\", \"field\": \"kubernetes.apiserver.request.latency.sum\", \"id\": \"61ca57f2-469d-11e7-af02-69e470af7417\"}, {\"type\": \"max\", \"field\": \"kubernetes.apiserver.request.count\", \"id\": \"a2185e50-57a0-11e8-af57-a1d645d2b569\"}, {\"type\": \"calculation\", \"script\": \"params.sum / params.count\", \"id\": \"b09133d0-57a0-11e8-af57-a1d645d2b569\", \"variables\": [{\"field\": \"61ca57f2-469d-11e7-af02-69e470af7417\", \"id\": \"b27c8910-57a0-11e8-af57-a1d645d2b569\", \"name\": \"sum\"}, {\"field\": \"a2185e50-57a0-11e8-af57-a1d645d2b569\", \"id\": \"b5fc8810-57a0-11e8-af57-a1d645d2b569\", \"name\": \"count\"}]}], \"split_mode\": \"everything\", \"axis_position\": \"right\", \"line_width\": 1, \"fill\": \"0\", \"id\": \"61ca57f1-469d-11e7-af02-69e470af7417\", \"label\": \"Avg response time\"}, {\"stacked\": \"none\", \"chart_type\": \"line\", \"formatter\": \"number\", \"seperate_axis\": 1, \"axis_position\": \"right\", \"color\": \"rgba(22,165,165,1)\", \"point_size\": 1, \"metrics\": [{\"type\": \"max\", \"field\": \"kubernetes.apiserver.request.count\", \"id\": \"c001ba50-57a1-11e8-a049-ff54cef064a2\"}, {\"type\": \"derivative\", \"unit\": \"\", \"field\": \"c001ba50-57a1-11e8-a049-ff54cef064a2\", \"id\": \"dc83b390-57a1-11e8-a049-ff54cef064a2\"}], \"split_mode\": \"everything\", \"line_width\": 1, \"fill\": 0.5, \"id\": \"c0019340-57a1-11e8-a049-ff54cef064a2\", \"label\": \"Requests rate\"}], \"time_field\": \"@timestamp\", \"id\": \"61ca57f0-469d-11e7-af02-69e470af7417\", \"index_pattern\": \"metricbeat-*\"}, \"type\": \"metrics\"}"
+            },
+            "id": "ec360ff0-57a0-11e8-afa2-e9067ea62228-ecs",
+            "type": "visualization",
+            "updated_at": "2018-05-14T18:21:27.515Z",
+            "version": 4
+        },
+        {
+            "attributes": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{}"
+                },
+                "title": "API Server Top clients by resource [Metricbeat Kubernetes] ECS",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\": \"API Server Top clients by resource [Metricbeat Kubernetes] ECS\", \"aggs\": [], \"params\": {\"bar_color_rules\": [{\"id\": \"61a13010-5794-11e8-8bd0-2180975e72dd\"}], \"show_grid\": 1, \"interval\": \"5m\", \"type\": \"top_n\", \"axis_position\": \"left\", \"axis_formatter\": \"number\", \"show_legend\": 1, \"series\": [{\"stacked\": \"stacked\", \"terms_size\": \"10\", \"chart_type\": \"line\", \"formatter\": \"number\", \"seperate_axis\": 0, \"filter\": \"\", \"terms_field\": \"kubernetes.apiserver.request.resource\", \"color\": \"rgba(104,188,0,1)\", \"point_size\": 1, \"metrics\": [{\"type\": \"max\", \"field\": \"kubernetes.apiserver.request.count\", \"id\": \"61ca57f2-469d-11e7-af02-69e470af7417\"}, {\"type\": \"derivative\", \"unit\": \"\", \"field\": \"61ca57f2-469d-11e7-af02-69e470af7417\", \"id\": \"0e6ff4a0-5792-11e8-8bd0-2180975e72dd\"}], \"override_index_pattern\": 0, \"split_mode\": \"terms\", \"axis_position\": \"right\", \"line_width\": 1, \"fill\": 0.5, \"split_filters\": [{\"color\": \"#68BC00\", \"id\": \"9e4b8030-5792-11e8-8bd0-2180975e72dd\"}], \"series_drop_last_bucket\": 1, \"terms_order_by\": \"61ca57f2-469d-11e7-af02-69e470af7417\", \"id\": \"61ca57f1-469d-11e7-af02-69e470af7417\", \"label\": \"Top clients by number of requests (5m)\"}], \"time_field\": \"@timestamp\", \"id\": \"61ca57f0-469d-11e7-af02-69e470af7417\", \"index_pattern\": \"metricbeat-*\"}, \"type\": \"metrics\"}"
+            },
+            "id": "95a7f110-57a2-11e8-afa2-e9067ea62228-ecs",
+            "type": "visualization",
+            "updated_at": "2018-05-14T18:23:50.093Z",
+            "version": 4
+        },
+        {
+            "attributes": {
+                "description": "Kubernetes API server metrics",
+                "hits": 0,
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"filter\": [], \"version\": true, \"highlightAll\": true, \"query\": {\"language\": \"kuery\", \"query\": \"\"}}"
+                },
+                "optionsJSON": "{\"hidePanelTitles\": false, \"darkTheme\": false, \"useMargins\": false}",
+                "panelsJSON": "[{\"version\": \"6.3.0\", \"type\": \"visualization\", \"panelIndex\": \"1\", \"gridData\": {\"h\": 24, \"i\": \"1\", \"x\": 0, \"w\": 24, \"y\": 22}, \"id\": \"7cbeb750-5794-11e8-afa2-e9067ea62228-ecs\", \"embeddableConfig\": {}}, {\"version\": \"6.3.0\", \"type\": \"visualization\", \"panelIndex\": \"3\", \"gridData\": {\"h\": 22, \"i\": \"3\", \"x\": 0, \"w\": 48, \"y\": 0}, \"id\": \"ec360ff0-57a0-11e8-afa2-e9067ea62228-ecs\", \"embeddableConfig\": {}}, {\"version\": \"6.3.0\", \"type\": \"visualization\", \"panelIndex\": \"4\", \"gridData\": {\"h\": 24, \"i\": \"4\", \"x\": 24, \"w\": 24, \"y\": 22}, \"id\": \"95a7f110-57a2-11e8-afa2-e9067ea62228-ecs\", \"embeddableConfig\": {}}]",
+                "timeRestore": false,
+                "title": "[Metricbeat Kubernetes] API server ECS",
+                "version": 1
+            },
+            "id": "af7225b0-5794-11e8-afa2-e9067ea62228-ecs",
+            "type": "dashboard",
+            "updated_at": "2018-05-14T18:23:55.202Z",
+            "version": 5
+        }
+    ],
+    "version": "6.3.0"
+}
