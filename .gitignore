@@ -29,7 +29,7 @@
 x64/
 x86/
 [Bb]in/compiler
-[Bb]in/in/*.zip
+[Bb]in/in
 [Bb]in/out
 [Bb]in/WixToolset
 [Oo]bj/

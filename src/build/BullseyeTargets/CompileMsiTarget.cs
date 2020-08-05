@@ -21,8 +21,8 @@ namespace ElastiBuild.BullseyeTargets
             });
 
             var compilerPath = Path
-                .Combine(ctx.CompilerDir, MagicStrings.Beats.CompilerName + MagicStrings.Ext.DotExe)
-                .Quote();
+                .Combine(ctx.CompilerDir, MagicStrings.Beats.CompilerName + MagicStrings.Ext.DotExe);
+                //.Quote();
 
             await SimpleExec.Command.RunAsync(compilerPath, args, ctx.InDir);
         }
