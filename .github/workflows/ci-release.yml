@@ -5,7 +5,7 @@ on:
     types: [created]
     
 env:
-  BEAT_VERSION: 7.7
+  BEAT_VERSION: 7.8
   GITHUB_TOKEN: ${{ github.token }}
 
 jobs:
