@@ -12,6 +12,7 @@ on:
 
 env:
   BEAT_VERSION: 7.8
+  GITHUB_VERSION: v7.8.1
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
